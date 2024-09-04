@@ -2,11 +2,11 @@ package com.yorkys.plugintest.players;
 
 import org.bukkit.entity.Player;
 
-public class TPlayer {
+public class MGPlayer {
     private Player player;
     private PlayerType type;
 
-    public TPlayer(Player player) {
+    public MGPlayer(Player player) {
         this.player = player;
     }
 
