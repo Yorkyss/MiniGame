@@ -1,24 +1,19 @@
 package com.yorkys.plugintest.players;
 
+import com.yorkys.plugintest.teams.Team;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.entity.Player;
 
+@Getter
+@Setter
 public class MGPlayer {
-    private Player player;
+    private final Player player;
+
     private PlayerType type;
+    private Team team = null;
 
     public MGPlayer(Player player) {
         this.player = player;
-    }
-
-    public void setType(PlayerType type) {
-        this.type = type;
-    }
-
-    public PlayerType getType() {
-        return type;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 }
