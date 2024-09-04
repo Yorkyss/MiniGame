@@ -1,0 +1,13 @@
+name: pluginTest
+version: '${project.version}'
+main: com.yorkys.plugintest.Main
+commands:
+  gmc:
+    description: Switch between gmc and gms
+    usage: /gmc
+  pecora:
+    description: Kill all sheeps
+    usage: /pecora
+  generator:
+    description: Create a generator
+    usage: /generator <iron/gold/diamond> <name>

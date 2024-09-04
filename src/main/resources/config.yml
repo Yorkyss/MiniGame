@@ -1,0 +1,9 @@
+generator-name:
+  name: iron
+  time: 10
+  type: IRON
+  lowtimeperupgrade: 2
+  x: 1113
+  y: 63
+  z: 203
+  world: world
