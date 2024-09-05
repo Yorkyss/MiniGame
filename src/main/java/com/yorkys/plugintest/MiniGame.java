@@ -1,5 +1,6 @@
 package com.yorkys.plugintest;
 
+import com.yorkys.plugintest.Inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
 import com.yorkys.plugintest.commands.GeneratorCommand;
 import com.yorkys.plugintest.gameManager.GameManager;
@@ -16,12 +17,14 @@ public final class MiniGame {
     private final GeneratorManager generatorManager;
     private final TeamsManager teamsManager;
     private final GameManager gameManager;
+    private final InventoryManager inventoryManager;
 
     MiniGame(JavaPlugin plugin) {
         this.plugin = plugin;
         generatorManager = new GeneratorManager(this);
         teamsManager = new TeamsManager(this);
         gameManager = new GameManager(this);
+        inventoryManager = new InventoryManager(this);
     }
 
     public void onEnable() {
@@ -94,5 +97,7 @@ public final class MiniGame {
     public GameManager getGameManager() {
         return gameManager;
     }
+
+    public InventoryManager getInventoryManager() { return  inventoryManager; }
 
 }
