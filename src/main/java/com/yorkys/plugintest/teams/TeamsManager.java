@@ -2,6 +2,7 @@ package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.MGPlayer;
+import com.yorkys.plugintest.players.PlayerType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -87,23 +88,23 @@ public class TeamsManager {
                 noTeamPlayers.remove(i);
             }
         }
-//
-//        greenTeam.formRoles();
-//        redTeam.formRoles();
-//
-//        teleportTeams();
+
+        greenTeam.giveRoles();
+        redTeam.giveRoles();
+
+        teleportTeams();
 
         return  true;
     }
 
     private void teleportTeams() {
-        greenTeam.getType1().getPlayer().teleport(locationGreenTYPE1);
-        greenTeam.getType2().getPlayer().teleport(locationGreenTYPE2);
-        greenTeam.getType3().getPlayer().teleport(locationGreenTYPE3);
+        greenTeam.getPlayerFromType(PlayerType.TYPE1).getPlayer().teleport(locationGreenTYPE1);
+//        greenTeam.getPlayerFromType(PlayerType.TYPE2).getPlayer().teleport(locationGreenTYPE2);
+//        greenTeam.getPlayerFromType(PlayerType.TYPE3).getPlayer().teleport(locationGreenTYPE3);
 
-        redTeam.getType1().getPlayer().teleport(locationRedTYPE1);
-        redTeam.getType2().getPlayer().teleport(locationRedTYPE2);
-        redTeam.getType3().getPlayer().teleport(locationRedTYPE3);
+        redTeam.getPlayerFromType(PlayerType.TYPE1).getPlayer().teleport(locationRedTYPE1);
+//        redTeam.getPlayerFromType(PlayerType.TYPE2).getPlayer().teleport(locationRedTYPE2);
+//        redTeam.getPlayerFromType(PlayerType.TYPE3).getPlayer().teleport(locationRedTYPE3);
     }
 
     public Team getGreenTeam() {

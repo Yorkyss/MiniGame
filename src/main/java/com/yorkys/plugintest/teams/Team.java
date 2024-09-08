@@ -4,8 +4,7 @@ import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.PlayerType;
 import com.yorkys.plugintest.players.MGPlayer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Team {
     private List<MGPlayer> mgPlayers = new ArrayList<>();
@@ -19,11 +18,22 @@ public class Team {
         this.miniGame = miniGame;
     }
 
-    public void formRoles() {
-        mgPlayers.get(0).setType(PlayerType.TYPE1);
-        mgPlayers.get(1).setType(PlayerType.TYPE2);
-        mgPlayers.get(2).setType(PlayerType.TYPE3);
+    public void giveRoles() {
+        Set<PlayerType> availableTypes = EnumSet.allOf(PlayerType.class);
+        for (MGPlayer player : mgPlayers) {
+            if (player.getType() != null) {
+                availableTypes.remove(player.getType());
+            }
+        }
+
+        Iterator<PlayerType> iterator = availableTypes.iterator();
+        for (MGPlayer player : mgPlayers) {
+            if (player.getType() == null && iterator.hasNext()) {
+                player.setType(iterator.next());
+            }
+        }
     }
+
 
     public boolean addPlayer(MGPlayer mgPlayer) {
         if (mgPlayers.size() < maxSize) {
@@ -59,23 +69,9 @@ public class Team {
         return mgPlayers;
     }
 
-    public MGPlayer getType1() {
+    public MGPlayer getPlayerFromType(PlayerType type) {
         return mgPlayers.stream()
-                .filter(MGPlayer -> MGPlayer.getType() == PlayerType.TYPE1)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public MGPlayer getType2() {
-        return mgPlayers.stream()
-                .filter(MGPlayer -> MGPlayer.getType() == PlayerType.TYPE2)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public MGPlayer getType3() {
-        return mgPlayers.stream()
-                .filter(MGPlayer -> MGPlayer.getType() == PlayerType.TYPE3)
+                .filter(MGPlayer -> MGPlayer.getType() == type)
                 .findFirst()
                 .orElse(null);
     }
