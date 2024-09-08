@@ -10,6 +10,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         miniGame = new MiniGame(this);
         miniGame.onEnable();
+        saveDefaultConfig();
     }
 
     @Override
