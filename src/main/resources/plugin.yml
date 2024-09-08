@@ -11,3 +11,6 @@ commands:
   generator:
     description: Create a generator
     usage: /generator <iron/gold/diamond> <name>
+  mg:
+    description: MiniGame commands
+    usage: /mg
