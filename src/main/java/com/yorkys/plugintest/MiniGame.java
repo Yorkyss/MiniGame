@@ -3,6 +3,7 @@ package com.yorkys.plugintest;
 import com.yorkys.plugintest.Inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
 import com.yorkys.plugintest.commands.GeneratorCommand;
+import com.yorkys.plugintest.commands.MiniGameCommand;
 import com.yorkys.plugintest.gameManager.GameManager;
 import com.yorkys.plugintest.generators.GeneratorManager;
 import com.yorkys.plugintest.listeners.JoinListener;
@@ -39,6 +40,7 @@ public final class MiniGame {
     private void registerCommands() {
         plugin.getCommand("gmc").setExecutor(new GMCommand(this));
         plugin.getCommand("generator").setExecutor(new GeneratorCommand(this));
+        plugin.getCommand("mg").setExecutor(new MiniGameCommand(this));
     }
 
     private void registerListeners() {
