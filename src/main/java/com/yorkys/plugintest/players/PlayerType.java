@@ -1,18 +1,18 @@
 package com.yorkys.plugintest.players;
 
 public enum PlayerType {
-    TYPE1(1),
-    TYPE2(2),
-    TYPE3(3);
+    TYPE1("type1"),
+    TYPE2("type2"),
+    TYPE3("type3");
 
-    private final int test;
+    private final String name;
 
-    PlayerType(int test) {
-        this.test = test;
+    PlayerType(String name) {
+        this.name = name;
     }
 
-    public int getTest() {
-        return test;
+    public String getName() {
+        return name;
     }
 
 }
