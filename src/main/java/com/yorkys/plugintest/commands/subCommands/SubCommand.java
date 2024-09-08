@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 public abstract class SubCommand {
 
-    protected static MiniGameCommand mgCommand;
+    public static MiniGameCommand mgCommand;
 
     protected final String name;
     protected final String permission;

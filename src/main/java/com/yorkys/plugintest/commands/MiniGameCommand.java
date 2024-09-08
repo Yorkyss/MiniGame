@@ -3,7 +3,7 @@ package com.yorkys.plugintest.commands;
 
 import com.google.common.collect.ImmutableList;
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.commands.subCommands.miniGame.Start;
+import com.yorkys.plugintest.commands.subCommands.MiniGame.Start;
 import com.yorkys.plugintest.commands.subCommands.SubCommand;
 import lombok.Getter;
 import org.bukkit.ChatColor;
