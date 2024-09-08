@@ -17,15 +17,19 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         event.setJoinMessage("+ " + event.getPlayer().getName());
+        miniGame.getTeamsManager().addPlayerToQueue(event.getPlayer());
 
-        if (Bukkit.getOnlinePlayers().size() == 6) {
-            miniGame.getGameManager().start();
-        }
+        System.out.println("Player in queue:");
+        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage("- " + event.getPlayer().getName());
+        miniGame.getTeamsManager().removePlayerToQueue(event.getPlayer());
+
+        System.out.println("Player in queue:");
+        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
     }
 
     @EventHandler
