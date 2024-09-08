@@ -1,5 +1,6 @@
 package com.yorkys.plugintest.teams;
 
+import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.PlayerType;
 import com.yorkys.plugintest.players.MGPlayer;
 
@@ -10,10 +11,12 @@ public class Team {
     private List<MGPlayer> mgPlayers = new ArrayList<>();
     private String color;
     private int maxSize;
+    private MiniGame miniGame;
 
-    public Team (String color, int maxSize) {
+    public Team (String color, int maxSize, MiniGame miniGame) {
         this.color = color;
         this.maxSize = maxSize;
+        this.miniGame = miniGame;
     }
 
     public void formRoles() {
@@ -31,12 +34,10 @@ public class Team {
         return false;
     }
 
-
-
     public boolean removePlayer(MGPlayer mgPlayer) {
         if (mgPlayers.contains(mgPlayer)) {
             mgPlayers.remove(mgPlayer);
-            mgPlayer.setTeam(null);
+            mgPlayer.removeTeam();
             return true;
         }
         return false;
