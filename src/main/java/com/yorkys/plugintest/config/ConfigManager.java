@@ -6,9 +6,10 @@ import lombok.Getter;
 @Getter
 public class ConfigManager {
     private MiniGame miniGame;
+
     private final SettingsConfig settingsConfig;
 
     public ConfigManager(MiniGame miniGame) {
-        this.settingsConfig = new SettingsConfig(config);
+        this.settingsConfig = new SettingsConfig(miniGame.getPlugin().getConfig());
     }
 }
