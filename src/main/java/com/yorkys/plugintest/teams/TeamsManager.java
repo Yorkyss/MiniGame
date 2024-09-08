@@ -18,13 +18,6 @@ public class TeamsManager {
     private Team redTeam;
     private int minMaxPlayer = 2;
 
-    private Location locationGreenTYPE1 = new Location(Bukkit.getWorld("world"), 7, 52, 1);
-    private Location locationGreenTYPE2 = new Location(Bukkit.getWorld("world"), 7, 52, 3);
-    private Location locationGreenTYPE3 = new Location(Bukkit.getWorld("world"), 7, 52, -0);
-    private Location locationRedTYPE1 = new Location(Bukkit.getWorld("world"), -12, 52, 1);
-    private Location locationRedTYPE2 = new Location(Bukkit.getWorld("world"), -12, 52, 3);
-    private Location locationRedTYPE3 = new Location(Bukkit.getWorld("world"), -12, 52, -0);
-
     public TeamsManager(MiniGame miniGame) {
         this.miniGame = miniGame;
         greenTeam = new Team("green", 1, miniGame);
@@ -98,13 +91,9 @@ public class TeamsManager {
     }
 
     private void teleportTeams() {
-        greenTeam.getPlayerFromType(PlayerType.TYPE1).getPlayer().teleport(locationGreenTYPE1);
-//        greenTeam.getPlayerFromType(PlayerType.TYPE2).getPlayer().teleport(locationGreenTYPE2);
-//        greenTeam.getPlayerFromType(PlayerType.TYPE3).getPlayer().teleport(locationGreenTYPE3);
-
-        redTeam.getPlayerFromType(PlayerType.TYPE1).getPlayer().teleport(locationRedTYPE1);
-//        redTeam.getPlayerFromType(PlayerType.TYPE2).getPlayer().teleport(locationRedTYPE2);
-//        redTeam.getPlayerFromType(PlayerType.TYPE3).getPlayer().teleport(locationRedTYPE3);
+        mgPlayers.forEach(mgp -> {
+            mgp.getPlayer().teleport(miniGame.getConfigManager().getSettingsConfig().getPlayerSpawnLocation(mgp));
+        });
     }
 
     public Team getGreenTeam() {
