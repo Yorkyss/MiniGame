@@ -1,5 +1,6 @@
 package com.yorkys.plugintest;
 
+import com.yorkys.plugintest.config.ConfigManager;
 import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
 import com.yorkys.plugintest.commands.GeneratorCommand;
@@ -28,6 +29,7 @@ public final class MiniGame {
         teamsManager = new TeamsManager(this);
         gameManager = new GameManager(this);
         inventoryManager = new InventoryManager(this);
+        configManager = new ConfigManager(this);
     }
 
     public void onEnable() {
@@ -103,5 +105,7 @@ public final class MiniGame {
     }
 
     public InventoryManager getInventoryManager() { return  inventoryManager; }
+
+    public ConfigManager getConfigManager() { return configManager; }
 
 }
