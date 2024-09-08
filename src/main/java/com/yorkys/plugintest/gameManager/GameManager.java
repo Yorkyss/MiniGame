@@ -13,7 +13,10 @@ public class GameManager {
 
     }
 
-    public void start() {
-        miniGame.getTeamsManager().formTeams();
+    public boolean start() {
+        boolean formedTeams = teamsManager.formTeams();
+        teamsManager.getGreenTeam().getPlayers().forEach(p -> System.out.println("GREEN: " + p.getPlayer().getName()));
+        teamsManager.getRedTeam().getPlayers().forEach(p -> System.out.println("RED: " + p.getPlayer().getName()));
+        return formedTeams;
     }
 }

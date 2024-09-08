@@ -3,8 +3,8 @@ package com.yorkys.plugintest.teams;
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.MGPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,9 @@ public class TeamsManager {
     private MiniGame miniGame;
 
     private List<MGPlayer> mgPlayers = new ArrayList<>();
-    private Team greenTeam = new Team("green", 3);
-    private Team redTeam = new Team("red", 3);
+    private Team greenTeam;
+    private Team redTeam;
+    private int minMaxPlayer = 2;
 
     private Location locationGreenTYPE1 = new Location(Bukkit.getWorld("world"), 7, 52, 1);
     private Location locationGreenTYPE2 = new Location(Bukkit.getWorld("world"), 7, 52, 3);
@@ -25,47 +26,74 @@ public class TeamsManager {
 
     public TeamsManager(MiniGame miniGame) {
         this.miniGame = miniGame;
+        greenTeam = new Team("green", 1, miniGame);
+        redTeam = new Team("red", 1, miniGame);
     }
 
-    public void formTeams() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            mgPlayers.add(new MGPlayer(player));
-        });
 
-        if (mgPlayers.size() < 6) {
+    public void addPlayerToQueue (Player player) {
+        mgPlayers.add(new MGPlayer(player));
+    }
+
+    public void removePlayerToQueue (Player player) {
+        MGPlayer mgp = getMGPlayerFromPlayer(player);
+        if (mgp == null) return;
+        mgp.setTeam(null);
+        mgPlayers.remove(getMGPlayerFromPlayer(player));
+    }
+
+    public boolean addGreenPlayer(Player player) {
+        MGPlayer mgp = getMGPlayerFromPlayer(player);
+        if (mgp != null) {
+            if (greenTeam.addPlayer(mgp)) {
+                if (!mgPlayers.contains(mgp)) mgPlayers.add(mgp);
+                return  true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addRedPlayer(Player player) {
+        MGPlayer mgp = getMGPlayerFromPlayer(player);
+        if (mgp != null) {
+            if (redTeam.addPlayer(mgp)) {
+                if (!mgPlayers.contains(mgp)) mgPlayers.add(mgp);
+                return  true;
+            }
+        }
+        return false;
+    }
+
+    public boolean formTeams() {
+        if (mgPlayers.size() < minMaxPlayer) {
             System.out.println("Non ci sono abbastanza giocatori per formare le squadre.");
-            return;
+            return false;
         }
 
+        List<MGPlayer> noTeamPlayers = new ArrayList<>(mgPlayers.stream()
+                .filter(p -> (p.getTeam() == null))
+                .toList());
 
-        if (greenTeam.getSize() != 3) {
-            List<MGPlayer> greenTeamPlayers = mgPlayers.subList(greenTeam.getSize(), 3);
-            greenTeamPlayers.forEach(greenPlayer -> {
-                if (greenPlayer.getTeam() == null) {
-                    greenTeam.addPlayer(greenPlayer);
-                }
-            });
+        if (greenTeam.getSize() < greenTeam.getMaxSize()) {
+            for (int i = 0; i < greenTeam.getMaxSize() - greenTeam.getSize(); i++) {
+                addGreenPlayer(noTeamPlayers.get(i).getPlayer());
+                noTeamPlayers.remove(i);
+            }
         }
 
-        if (redTeam.getSize() != 3) {
-            List<MGPlayer> redTeamPlayers = mgPlayers.subList(3 + redTeam.getSize(), 6);
-            redTeamPlayers.forEach(redPlayer -> {
-                if (redPlayer.getTeam() == null) {
-                    redTeam.addPlayer(redPlayer);
-                }
-            });
+        if (redTeam.getSize() < redTeam.getMaxSize()) {
+            for (int i = 0; i < redTeam.getMaxSize() - redTeam.getSize(); i++) {
+                addRedPlayer(noTeamPlayers.get(i).getPlayer());
+                noTeamPlayers.remove(i);
+            }
         }
+//
+//        greenTeam.formRoles();
+//        redTeam.formRoles();
+//
+//        teleportTeams();
 
-        greenTeam.getPlayers().forEach(p -> System.out.println(ChatColor.GREEN + p.getPlayer().getName()));
-        System.out.println();
-        System.out.println(greenTeam.getMaxSize());
-        redTeam.getPlayers().forEach(p -> System.out.println(ChatColor.RED + p.getPlayer().getName()));
-        System.out.println(redTeam.getMaxSize());
-
-        greenTeam.formRoles();
-        redTeam.formRoles();
-
-        teleportTeams();
+        return  true;
     }
 
     private void teleportTeams() {
@@ -84,5 +112,16 @@ public class TeamsManager {
 
     public Team getRedTeam() {
         return redTeam;
+    }
+
+    public List<MGPlayer> getMgPlayers() {
+        return  mgPlayers;
+    }
+
+    public MGPlayer getMGPlayerFromPlayer(Player player) {
+        return mgPlayers.stream()
+                .filter(p -> p.getPlayer().getUniqueId().equals(player.getUniqueId()))
+                .findFirst()
+                .orElse(null);
     }
 }
