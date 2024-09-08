@@ -1,4 +1,4 @@
-package com.yorkys.plugintest.Inventory;
+package com.yorkys.plugintest.inventory;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

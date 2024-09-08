@@ -3,9 +3,9 @@ package com.yorkys.plugintest.commands;
 
 import com.google.common.collect.ImmutableList;
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.commands.SubCommands.MiniGame.Start;
+import com.yorkys.plugintest.commands.subCommands.miniGame.Start;
+import com.yorkys.plugintest.commands.subCommands.SubCommand;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

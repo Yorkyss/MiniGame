@@ -1,4 +1,4 @@
-package com.yorkys.plugintest.Inventory;
+package com.yorkys.plugintest.inventory;
 
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.utils.Colorizer;

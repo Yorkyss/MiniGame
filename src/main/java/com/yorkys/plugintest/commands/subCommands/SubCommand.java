@@ -1,7 +1,7 @@
-package com.yorkys.plugintest.commands;
+package com.yorkys.plugintest.commands.subCommands;
 
 import com.google.common.collect.ImmutableList;
-import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.commands.MiniGameCommand;
 import com.yorkys.plugintest.utils.Colorizer;
 import lombok.Getter;
 import lombok.Setter;

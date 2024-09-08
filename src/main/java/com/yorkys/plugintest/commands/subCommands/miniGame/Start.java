@@ -1,6 +1,6 @@
-package com.yorkys.plugintest.commands.SubCommands.MiniGame;
+package com.yorkys.plugintest.commands.subCommands.miniGame;
 
-import com.yorkys.plugintest.commands.SubCommand;
+import com.yorkys.plugintest.commands.subCommands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

@@ -1,6 +1,6 @@
 package com.yorkys.plugintest;
 
-import com.yorkys.plugintest.Inventory.InventoryManager;
+import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
 import com.yorkys.plugintest.commands.GeneratorCommand;
 import com.yorkys.plugintest.commands.MiniGameCommand;
@@ -15,10 +15,12 @@ import org.bukkit.scheduler.BukkitTask;
 
 public final class MiniGame {
     private final JavaPlugin plugin;
+
     private final GeneratorManager generatorManager;
     private final TeamsManager teamsManager;
     private final GameManager gameManager;
     private final InventoryManager inventoryManager;
+    private final ConfigManager configManager;
 
     MiniGame(JavaPlugin plugin) {
         this.plugin = plugin;

@@ -1,6 +1,6 @@
-package com.yorkys.plugintest.Inventory;
+package com.yorkys.plugintest.inventory;
 
-import com.yorkys.plugintest.Inventory.menus.SettingsMenu;
+import com.yorkys.plugintest.inventory.menus.SettingsMenu;
 import com.yorkys.plugintest.MiniGame;
 import lombok.Getter;
 import org.bukkit.entity.Player;
