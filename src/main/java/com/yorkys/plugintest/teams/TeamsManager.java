@@ -2,9 +2,6 @@ package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.MGPlayer;
-import com.yorkys.plugintest.players.PlayerType;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

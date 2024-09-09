@@ -14,9 +14,6 @@ public class GameManager {
     }
 
     public boolean start() {
-        boolean formedTeams = teamsManager.formTeams();
-        teamsManager.getGreenTeam().getPlayers().forEach(p -> System.out.println("GREEN: " + p.getPlayer().getName()));
-        teamsManager.getRedTeam().getPlayers().forEach(p -> System.out.println("RED: " + p.getPlayer().getName()));
-        return formedTeams;
+        return teamsManager.formTeams();
     }
 }
