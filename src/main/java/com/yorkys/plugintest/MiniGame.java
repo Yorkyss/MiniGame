@@ -1,5 +1,6 @@
 package com.yorkys.plugintest;
 
+import com.yorkys.plugintest.NPC.NPCManager;
 import com.yorkys.plugintest.config.ConfigManager;
 import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
@@ -23,6 +24,7 @@ public final class MiniGame {
     private final GameManager gameManager;
     private final InventoryManager inventoryManager;
     private final ConfigManager configManager;
+    private final NPCManager npcManager;
 
     MiniGame(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -31,6 +33,7 @@ public final class MiniGame {
         gameManager = new GameManager(this);
         inventoryManager = new InventoryManager(this);
         configManager = new ConfigManager(this);
+        npcManager = new NPCManager(this);
     }
 
     public void onEnable() {
@@ -109,5 +112,7 @@ public final class MiniGame {
     public InventoryManager getInventoryManager() { return  inventoryManager; }
 
     public ConfigManager getConfigManager() { return configManager; }
+
+    public NPCManager getNpcManager() { return npcManager; }
 
 }
