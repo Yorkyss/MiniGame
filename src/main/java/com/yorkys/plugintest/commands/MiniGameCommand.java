@@ -3,6 +3,7 @@ package com.yorkys.plugintest.commands;
 
 import com.google.common.collect.ImmutableList;
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.commands.subCommands.MiniGame.NPCCommand;
 import com.yorkys.plugintest.commands.subCommands.MiniGame.Start;
 import com.yorkys.plugintest.commands.subCommands.SubCommand;
 import lombok.Getter;
@@ -31,7 +32,8 @@ public class MiniGameCommand implements CommandExecutor, TabCompleter {
         this.miniGame = miniGame;
         SubCommand.mgCommand = this;
 
-        registerModule(new Start());
+        registerSubCommand(new Start());
+        registerSubCommand(new NPCCommand());
     }
 
     @Override
@@ -87,7 +89,7 @@ public class MiniGameCommand implements CommandExecutor, TabCompleter {
         return subCommands.get(name.toLowerCase());
     }
 
-    private void registerModule(SubCommand subCommand) {
+    private void registerSubCommand(SubCommand subCommand) {
         subCommands.put(subCommand.getName().toLowerCase(), subCommand);
         for (String alias : subCommand.getAliases())
             subCommands.put(alias.toLowerCase(), subCommand);
