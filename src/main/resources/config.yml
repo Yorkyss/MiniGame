@@ -1,4 +1,4 @@
-playersSpawn:
+player-spawn:
   green:
     type1:
       x: 7
