@@ -4,7 +4,6 @@ import com.yorkys.plugintest.NPC.NPCManager;
 import com.yorkys.plugintest.config.ConfigManager;
 import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
-import com.yorkys.plugintest.commands.GeneratorCommand;
 import com.yorkys.plugintest.commands.MiniGameCommand;
 import com.yorkys.plugintest.gameManager.GameManager;
 import com.yorkys.plugintest.generators.GeneratorManager;
@@ -47,7 +46,6 @@ public final class MiniGame {
 
     private void registerCommands() {
         plugin.getCommand("gmc").setExecutor(new GMCommand(this));
-        plugin.getCommand("generator").setExecutor(new GeneratorCommand(this));
         plugin.getCommand("mg").setExecutor(new MiniGameCommand(this));
     }
 
