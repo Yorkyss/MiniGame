@@ -25,3 +25,72 @@ player-spawn:
       x: -12
       y: 52
       z: 3
+generators:
+  green:
+    iron:
+      location:
+        x: -11
+        y: 52
+        z: 3
+      max-level: 1
+      time-to-spawn: 1
+      time-to-upgrade: 0
+      item-material: IRON_INGOT
+      block-material: IRON_BLOCK
+      max-stack-size: 16
+    gold:
+      location:
+        x: -10
+        y: 52
+        z: 3
+      max-level: 1
+      time-to-spawn: 3
+      time-to-upgrade: 0
+      item-material: GOLD_INGOT
+      block-material: GOLD_BLOCK
+      max-stack-size: 8
+    diamond:
+      location:
+        x: -9
+        y: 52
+        z: 3
+      max-level: 3
+      time-to-spawn: 15
+      time-to-upgrade: 30
+      item-material: DIAMOND
+      block-material: DIAMOND_BLOCK
+      max-stack-size: 4
+  red:
+    iron:
+      location:
+        x: -8
+        y: 52
+        z: 3
+      max-level: 1
+      time-to-spawn: 1
+      time-to-upgrade: 0
+      item-material: IRON_INGOT
+      block-material: IRON_BLOCK
+      max-stack-size: 16
+    gold:
+      location:
+        x: -7
+        y: 52
+        z: 3
+      max-level: 1
+      time-to-spawn: 3
+      time-to-upgrade: 0
+      item-material: GOLD_INGOT
+      block-material: GOLD_BLOCK
+      max-stack-size: 8
+    diamond:
+      location:
+        x: -6
+        y: 52
+        z: 3
+      max-level: 3
+      time-to-spawn: 15
+      time-to-upgrade: 30
+      item-material: DIAMOND
+      block-material: DIAMOND_BLOCK
+      max-stack-size: 4
