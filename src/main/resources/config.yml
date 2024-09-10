@@ -94,3 +94,16 @@ generators:
       item-material: DIAMOND
       block-material: DIAMOND_BLOCK
       max-stack-size: 4
+shop-npc:
+  name: SHOP
+  id: shop
+  green:
+    location:
+      x: -3
+      y: 52
+      z: 4
+  red:
+    location:
+      x: -3
+      y: 52
+      z: 2
