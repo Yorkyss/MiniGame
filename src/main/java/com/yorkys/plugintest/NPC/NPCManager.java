@@ -26,26 +26,31 @@ public class NPCManager {
         spawnedNPCsID.put(npc.getUUID(), npc.getID());
     }
 
-    private void removeNPC(NPC npc) {
-        spawnedNPCs.remove(npc);
-        spawnedNPCsID.remove(npc.getUUID());
-        npc.removeNPC();
-    }
-
-    public void removeAllNPCs(String ID) {
-        spawnedNPCs.forEach(npc -> {
-            if (Objects.equals(npc.getID(), ID)) {
-                removeNPC(npc);
-            }
-        });
+    private void removeAllNPCs(NPC npc, String ID) {
+        if (spawnedNPCs.removeIf(p -> Objects.equals(p.getID(), ID))) {
+            spawnedNPCsID.remove(npc.getUUID());
+            npc.removeNPC();
+        }
     }
 
     public void spawnAllNPCs(String ID) {
         npcs.forEach(npc -> {
-           if (Objects.equals(npc.getID(), ID)) {
-               spawnNPC(npc);
-           }
+            if (Objects.equals(npc.getID(), ID)) {
+                spawnNPC(npc);
+            }
         });
+    }
+
+    public void removeAllNPCs(String ID) {
+        Iterator<NPC> iterator = spawnedNPCs.iterator();
+        while (iterator.hasNext()) {
+            NPC npc = iterator.next();
+            if (npc.getID().equals(ID)) {
+                iterator.remove(); // Safely remove the element from the list
+                spawnedNPCsID.remove(npc.getUUID());
+                npc.removeNPC();
+            }
+        }
     }
 
 
