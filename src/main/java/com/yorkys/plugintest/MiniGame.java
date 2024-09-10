@@ -9,7 +9,7 @@ import com.yorkys.plugintest.generators.GeneratorManager;
 import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.listeners.JoinListener;
 import com.yorkys.plugintest.listeners.MenuListener;
-import com.yorkys.plugintest.listeners.TestListener;
+import com.yorkys.plugintest.listeners.NPCListener;
 import com.yorkys.plugintest.teams.TeamsManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -52,7 +52,7 @@ public final class MiniGame {
     private void registerListeners() {
         plugin.getServer().getPluginManager().registerEvents(new JoinListener(this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MenuListener(this), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new TestListener(this), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new NPCListener(this), plugin);
     }
 
     public BukkitTask runTask(Runnable runnable){

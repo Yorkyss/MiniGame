@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public class TestListener implements Listener {
+public class NPCListener implements Listener {
 
     private final MiniGame miniGame;
 
