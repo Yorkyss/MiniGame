@@ -4,82 +4,58 @@ import com.yorkys.plugintest.MiniGame;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.*;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
-
-import java.util.Collection;
 
 @Getter
 @Setter
 public class Generator {
     private MiniGame miniGame;
-    private JavaPlugin plugin;
-    private String name; // generator name (for config)
-    private Location loc; // generator location
-    private GeneratorType generatorType;
 
-    private int spawnTime; // time
-    private int upgradeTime; // total time
-    private Material blockMaterial;
-    private Material itemMaterial;
+    private GeneratorType type;
+    private String name;
+    private Location location;
+    private int maxLevel;
+    private int spawnTime;
+    private int upgradeTime;
     private int maxStackSize;
-
     private ItemStack itemStack;
+    private Material itemMaterial;
+    private Material blockMaterial;
 
-    private int currentLevel = 1; // generator level
+    private int currentLevel = 1;
     private int currentSpawnTime;
     private int currentUpgradeTime;
 
     private BukkitRunnable task;
 
-    public Generator(String name, Location loc, GeneratorType generatorType, MiniGame miniGame) {
-        this.name = name;
-        this.loc = new Location(loc.getWorld(), loc.getX() + 0.5, loc.getY() + 0.5, loc.getZ() + 0.5);
+    public Generator(MiniGame miniGame, String name, GeneratorType type, Location location,
+                     int maxLevel, int spawnTime, int upgradeTime, int maxStackSize,
+                     Material itemMaterial, Material blockMaterial) {
         this.miniGame = miniGame;
-
-        plugin = miniGame.getPlugin();
-
-        spawnTime = generatorType.getSpawnTime();
-        upgradeTime = generatorType.getUpgradeTime();
-        blockMaterial = generatorType.getBlockMaterial();
-        itemMaterial = generatorType.getItemMaterial();
-        maxStackSize = generatorType.getMaxStackSize();
+        this.type = type;
+        this.name = name;
+        this.location = location;
+        this.maxLevel = maxLevel;
+        this.spawnTime = spawnTime;
+        this.upgradeTime = upgradeTime;
+        this.maxStackSize = maxStackSize;
+        this.itemMaterial = itemMaterial;
+        this.blockMaterial = blockMaterial;
 
         itemStack = new ItemStack(itemMaterial);
 
         currentSpawnTime = spawnTime;
         currentUpgradeTime = upgradeTime;
-
-        StartGenerator();
     }
 
     public void increaseLevel() {
-        if (currentLevel >= 3) {
-            return;
-        }
-
         spawnTime = spawnTime / 2;
         currentSpawnTime = 0;
         currentLevel += 1;
-
-        Firework firework = loc.getWorld().spawn(loc, Firework.class);
-        FireworkMeta data = firework.getFireworkMeta();
-        data.addEffects(FireworkEffect.builder().withColor(Color.RED).withColor(Color.WHITE).withColor(Color.LIME)
-                .withColor(Color.PURPLE).withColor(Color.AQUA).withColor(Color.BLUE).withColor(Color.YELLOW)
-                .withColor(Color.GREEN).with(Type.BALL_LARGE).build());
-        data.setPower(0);
-        firework.setFireworkMeta(data);
     }
 
-    public void StartGenerator() {
+    public void start() {
         miniGame.runTaskTimer(task = new GeneratorRunnable(this), 0, 20);
     }
 
