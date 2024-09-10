@@ -21,7 +21,7 @@ public class TestListener implements Listener {
         Player player = event.getPlayer();
         if (!miniGame.getNpcManager().existNPC(event.getRightClicked().getUniqueId())) return;
 
-        if (Objects.equals(miniGame.getNpcManager().getNPCFromID(event.getRightClicked().getUniqueId()).getID(), "shop")) {
+        if (Objects.equals(miniGame.getNpcManager().getNPCFromID(event.getRightClicked().getUniqueId()).getID(), miniGame.getConfigManager().getSettingsConfig().shopNPCID)) {
             event.setCancelled(true);
             player.sendMessage("&btest");
         }
@@ -32,7 +32,7 @@ public class TestListener implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
         UUID entityUUID = event.getEntity().getUniqueId();
 
-        if (miniGame.getNpcManager().existNPC(entityUUID) && Objects.equals(miniGame.getNpcManager().getNPCFromID(entityUUID).getID(), "shop")) {
+        if (miniGame.getNpcManager().existNPC(entityUUID) && Objects.equals(miniGame.getNpcManager().getNPCFromID(entityUUID).getID(),  miniGame.getConfigManager().getSettingsConfig().shopNPCID)) {
             event.setCancelled(true);
         }
     }

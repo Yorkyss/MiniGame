@@ -38,8 +38,8 @@ public class SettingsConfig {
     // Shop NPC settings
     private List<NPC> shopNPCs = new ArrayList<>();
     private HashMap<String, Location> shopNPCLocation = new HashMap<>();
-    private String shopNPCName;
-    private String shopNPCID;
+    public String shopNPCName;
+    public String shopNPCID;
 
     public SettingsConfig(FileConfiguration config, MiniGame miniGame) {
         this.config = config;
