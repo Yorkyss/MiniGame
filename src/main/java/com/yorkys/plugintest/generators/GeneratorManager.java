@@ -1,8 +1,6 @@
 package com.yorkys.plugintest.generators;
 
 import com.yorkys.plugintest.MiniGame;
-import org.bukkit.Location;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,17 +9,19 @@ import java.util.Objects;
 
 public class GeneratorManager {
     private MiniGame miniGame;
-    private JavaPlugin plugin;
     private List<Generator> generatorsList = new ArrayList<>();
 
     public GeneratorManager(MiniGame miniGame) {
         this.miniGame = miniGame;
-        plugin = miniGame.getPlugin();
     }
 
-    public void createGenerator(String name, Location location, GeneratorType generatorType) {
-        Generator generator = new Generator(name, location, generatorType, miniGame);
+    public void spawnGenerator(Generator generator) {
+        generator.start();
         generatorsList.add(generator);
+    }
+
+    public void createAllGenerators() {
+        miniGame.getConfigManager().getSettingsConfig().getGenerators().forEach(this::spawnGenerator);
     }
 
     public boolean removeGenerator(String name) {
@@ -32,8 +32,8 @@ public class GeneratorManager {
             Generator generator = iterator.next();
 
             if (Objects.equals(generator.getName(), name)) {
-                iterator.remove(); // Correct way to remove while iterating
-                generator.remove(); // Additional cleanup if needed
+                iterator.remove();
+                generator.remove();
                 generatorExist = true;
             }
         }
