@@ -1,4 +1,4 @@
-package com.yorkys.plugintest.listeners;
+package com.yorkys.plugintest.listeners.queue;
 
 
 import com.yorkys.plugintest.MiniGame;
