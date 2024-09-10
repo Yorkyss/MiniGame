@@ -19,11 +19,6 @@ public class NPCManager {
         npcs.add(npc);
     }
 
-    private void removeNPC(NPC npc) {
-        spawnedNPCs.remove(npc);
-        spawnedNPCsID.remove(npc.getUUID());
-        npc.removeNPC();
-    }
 
     private void spawnNPC(NPC npc) {
         npc.spawn();
@@ -31,12 +26,26 @@ public class NPCManager {
         spawnedNPCsID.put(npc.getUUID(), npc.getID());
     }
 
-    public void spawnAllNPCs(String ID) {
-        npcs.forEach(this::spawnNPC);
+    private void removeNPC(NPC npc) {
+        spawnedNPCs.remove(npc);
+        spawnedNPCsID.remove(npc.getUUID());
+        npc.removeNPC();
     }
 
-    public void removeAllNPCs() {
-        spawnedNPCs.forEach(NPC::removeNPC);
+    public void removeAllNPCs(String ID) {
+        spawnedNPCs.forEach(npc -> {
+            if (Objects.equals(npc.getID(), ID)) {
+                removeNPC(npc);
+            }
+        });
+    }
+
+    public void spawnAllNPCs(String ID) {
+        npcs.forEach(npc -> {
+           if (Objects.equals(npc.getID(), ID)) {
+               spawnNPC(npc);
+           }
+        });
     }
 
 

@@ -25,6 +25,6 @@ public class GameManager {
     }
 
     public void stop() {
-        miniGame.getNpcManager().removeAllNPCs();
+        miniGame.getNpcManager().removeAllNPCs(miniGame.getConfigManager().getSettingsConfig().shopNPCID);
     }
 }
