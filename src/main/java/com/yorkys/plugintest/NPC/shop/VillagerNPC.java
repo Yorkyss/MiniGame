@@ -8,19 +8,24 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 
 public class VillagerNPC extends NPC {
+    private Villager villager;
 
-    public VillagerNPC(String customName, String ID, Location location, boolean hasAI) {
-        super(customName, ID, location, hasAI);
+    public VillagerNPC(String customName, String ID, Location location) {
+        super(customName, ID, location);
+        hasAI = false;
+        invulnerable = true;
+        silent = true;
     }
 
     @Override
     public void spawn() {
-        Villager villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
-
-        nmsEntity = ((CraftEntity) villager).getHandle();
-        setAI(hasAI());
-
+        villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
         villager.setCustomName(ChatColor.translateAlternateColorCodes('&', customName));
         villager.setCustomNameVisible(true);
+        villager.setRemoveWhenFarAway(false);
+
+        nmsEntity = ((CraftEntity) villager).getHandle();
+        setAI(hasAI);
+        setSilent(silent);
     }
 }
