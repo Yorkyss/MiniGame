@@ -7,35 +7,35 @@ import java.util.*;
 public class NPCManager {
     private MiniGame miniGame;
 
+    private List<NPC> npcs = new ArrayList<>();
     private List<NPC> spawnedNPCs = new ArrayList<>();
-    private HashMap<UUID, String> npcsID = new HashMap<>();
+    private HashMap<UUID, String> spawnedNPCsID = new HashMap<>();
 
     public NPCManager(MiniGame miniGame) {
         this.miniGame = miniGame;
     }
 
-    private void addNPC(NPC npc) {
-        spawnedNPCs.add(npc);
-        npcsID.put(npc.getUUID(), npc.getID());
+    public void addNPC(NPC npc) {
+        npcs.add(npc);
     }
 
     private void removeNPC(NPC npc) {
         spawnedNPCs.remove(npc);
-        npcsID.remove(npc.getUUID());
+        spawnedNPCsID.remove(npc.getUUID());
         npc.removeNPC();
     }
 
     private void spawnNPC(NPC npc) {
         npc.spawn();
-        addNPC(npc);
+        spawnedNPCs.add(npc);
+        spawnedNPCsID.put(npc.getUUID(), npc.getID());
     }
 
-    public void spawnAllNPCs() {
-        miniGame.getConfigManager().getSettingsConfig().getShopNPCs().forEach(this::spawnNPC);
+    public void spawnAllNPCs(String ID) {
+        npcs.forEach(this::spawnNPC);
     }
 
     public void removeAllNPCs() {
-        System.out.println(spawnedNPCs);
         spawnedNPCs.forEach(NPC::removeNPC);
     }
 
@@ -49,7 +49,7 @@ public class NPCManager {
     }
 
     public NPC getNPCFromID(UUID uuid) {
-        return getNPCFromID(npcsID.get(uuid));
+        return getNPCFromID(spawnedNPCsID.get(uuid));
     }
 
     public boolean existNPC(String customName) {

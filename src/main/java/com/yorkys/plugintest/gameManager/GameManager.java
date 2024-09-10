@@ -17,7 +17,7 @@ public class GameManager {
             } catch (Exception e) {
                 return false;
             }
-            miniGame.getNpcManager().spawnAllNPCs();
+            miniGame.getNpcManager().spawnAllNPCs(miniGame.getConfigManager().getSettingsConfig().shopNPCID);
 
             return true;
         }

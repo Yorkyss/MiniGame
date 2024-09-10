@@ -66,6 +66,7 @@ public class SettingsConfig {
         shopNPCID = config.getString("shop-npc.id");
         initializeShopNPCSettings("green");
         initializeShopNPCSettings("red");
+        shopNPCs.forEach(npc -> miniGame.getNpcManager().addNPC(npc));
     }
 
     // path should be the word before x, y, z

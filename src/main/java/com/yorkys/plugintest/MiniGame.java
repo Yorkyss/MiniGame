@@ -31,8 +31,8 @@ public final class MiniGame {
         teamsManager = new TeamsManager(this);
         gameManager = new GameManager(this);
         inventoryManager = new InventoryManager(this);
-        configManager = new ConfigManager(this);
         npcManager = new NPCManager(this);
+        configManager = new ConfigManager(this);
     }
 
     public void onEnable() {
