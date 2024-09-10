@@ -1,6 +1,8 @@
 package com.yorkys.plugintest.config;
 
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.NPC.NPC;
+import com.yorkys.plugintest.NPC.shop.VillagerNPC;
 import com.yorkys.plugintest.generators.Generator;
 import com.yorkys.plugintest.generators.GeneratorType;
 import com.yorkys.plugintest.players.MGPlayer;
@@ -19,19 +21,25 @@ public class SettingsConfig {
     private final FileConfiguration config;
     private final MiniGame miniGame;
     // Players spawn locations
-    public HashMap<PlayerType, Location> greenPlayerTypeLocations = new HashMap<>();
-    public HashMap<PlayerType, Location> redPlayerTypeLocations = new HashMap<>();
+    private HashMap<PlayerType, Location> greenPlayerTypeLocations = new HashMap<>();
+    private HashMap<PlayerType, Location> redPlayerTypeLocations = new HashMap<>();
 
 
     // Generators settings
-    public HashMap<String, Location> generatorLocations = new HashMap<>();
-    public HashMap<String, Integer> generatorMaxLevel = new HashMap<>();
-    public HashMap<String, Integer> generatorTimeToSpawn = new HashMap<>();
-    public HashMap<String, Integer> generatorTimeToUpgrade = new HashMap<>();
-    public HashMap<String, Integer> generatorMaxStackSize = new HashMap<>();
-    public HashMap<String, String> generatorItemMaterial = new HashMap<>();
-    public HashMap<String, String> generatorBlockMaterial = new HashMap<>();
-    public List<Generator> generators = new ArrayList<>();
+    private List<Generator> generators = new ArrayList<>();
+    private HashMap<String, Location> generatorLocations = new HashMap<>();
+    private HashMap<String, Integer> generatorMaxLevel = new HashMap<>();
+    private HashMap<String, Integer> generatorTimeToSpawn = new HashMap<>();
+    private HashMap<String, Integer> generatorTimeToUpgrade = new HashMap<>();
+    private HashMap<String, Integer> generatorMaxStackSize = new HashMap<>();
+    private HashMap<String, String> generatorItemMaterial = new HashMap<>();
+    private HashMap<String, String> generatorBlockMaterial = new HashMap<>();
+
+    // Shop NPC settings
+    private List<NPC> shopNPCs = new ArrayList<>();
+    private HashMap<String, Location> shopNPCLocation = new HashMap<>();
+    private String shopNPCName;
+    private String shopNPCID;
 
     public SettingsConfig(FileConfiguration config, MiniGame miniGame) {
         this.config = config;
@@ -52,6 +60,12 @@ public class SettingsConfig {
         initializeGeneratorsSettings("red", "iron");
         initializeGeneratorsSettings("red", "gold");
         initializeGeneratorsSettings("red", "diamond");
+
+        // Storing shop npc settings
+        shopNPCName = config.getString("shop-npc.name");
+        shopNPCID = config.getString("shop-npc.id");
+        initializeShopNPCSettings("green");
+        initializeShopNPCSettings("red");
     }
 
     // path should be the word before x, y, z
@@ -96,6 +110,21 @@ public class SettingsConfig {
         }
     }
 
+    private void initializeShopNPCSettings(String type) {
+        try {
+            Location location = getLocationWithPath("shop-npc." + type + ".location");
+            shopNPCLocation.put(type, location);
+
+            shopNPCs.add(new VillagerNPC(
+                    shopNPCName,
+                    shopNPCID,
+                    location
+            ));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Location getPlayerSpawnLocation(MGPlayer mgp) {
         if (Objects.equals(mgp.getTeam().getColor(), "green")) {
             return greenPlayerTypeLocations.get(mgp.getType());
@@ -106,5 +135,9 @@ public class SettingsConfig {
 
     public List<Generator> getGenerators() {
         return generators;
+    }
+
+    public List<NPC> getShopNPCs() {
+        return shopNPCs;
     }
 }
