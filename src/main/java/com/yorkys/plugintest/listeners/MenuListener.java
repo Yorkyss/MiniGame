@@ -1,8 +1,8 @@
 package com.yorkys.plugintest.listeners;
 
 
-import com.yorkys.plugintest.inventory.Menu;
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.inventory.Menu;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

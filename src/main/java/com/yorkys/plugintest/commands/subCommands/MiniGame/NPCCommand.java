@@ -2,7 +2,7 @@ package com.yorkys.plugintest.commands.subCommands.MiniGame;
 
 import com.yorkys.plugintest.NPC.shop.VillagerNPC;
 import com.yorkys.plugintest.commands.subCommands.SubCommand;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 
 public class NPCCommand extends SubCommand {
     public NPCCommand() {

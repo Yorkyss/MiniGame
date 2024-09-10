@@ -1,12 +1,12 @@
 package com.yorkys.plugintest;
 
 import com.yorkys.plugintest.NPC.NPCManager;
-import com.yorkys.plugintest.config.ConfigManager;
-import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.commands.GMCommand;
 import com.yorkys.plugintest.commands.MiniGameCommand;
+import com.yorkys.plugintest.config.ConfigManager;
 import com.yorkys.plugintest.gameManager.GameManager;
 import com.yorkys.plugintest.generators.GeneratorManager;
+import com.yorkys.plugintest.inventory.InventoryManager;
 import com.yorkys.plugintest.listeners.JoinListener;
 import com.yorkys.plugintest.listeners.MenuListener;
 import com.yorkys.plugintest.listeners.TestListener;

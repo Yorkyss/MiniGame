@@ -4,8 +4,6 @@ import net.minecraft.server.v1_8_R3.Entity;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.Location;
 
-import java.lang.reflect.Field;
-
 public class NPC {
     protected String customName;
     protected String ID;

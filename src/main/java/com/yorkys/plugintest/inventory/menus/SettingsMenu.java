@@ -1,7 +1,7 @@
 package com.yorkys.plugintest.inventory.menus;
 
-import com.yorkys.plugintest.inventory.Menu;
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.inventory.Menu;
 import com.yorkys.plugintest.players.MGPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

@@ -1,8 +1,8 @@
 package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.players.PlayerType;
 import com.yorkys.plugintest.players.MGPlayer;
+import com.yorkys.plugintest.players.PlayerType;
 
 import java.util.*;
 

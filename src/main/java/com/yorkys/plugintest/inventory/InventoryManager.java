@@ -1,9 +1,10 @@
 package com.yorkys.plugintest.inventory;
 
-import com.yorkys.plugintest.inventory.menus.SettingsMenu;
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.inventory.menus.SettingsMenu;
 import lombok.Getter;
 import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 

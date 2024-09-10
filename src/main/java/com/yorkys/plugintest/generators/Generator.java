@@ -3,7 +3,8 @@ package com.yorkys.plugintest.generators;
 import com.yorkys.plugintest.MiniGame;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
