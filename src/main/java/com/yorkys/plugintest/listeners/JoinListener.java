@@ -2,6 +2,7 @@ package com.yorkys.plugintest.listeners;
 
 import com.yorkys.plugintest.MiniGame;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -15,20 +16,22 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        event.setJoinMessage("+ " + event.getPlayer().getName());
+        event.setJoinMessage(ChatColor.GREEN + "+" + ChatColor.GRAY + event.getPlayer().getName());
         miniGame.getTeamsManager().addPlayerToQueue(event.getPlayer());
 
-        System.out.println("Player in queue:");
-        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+//        DEBUGGING QUEUE JOIN
+//        System.out.println("Player in queue:");
+//        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        event.setQuitMessage("- " + event.getPlayer().getName());
+        event.setQuitMessage(ChatColor.RED + "+" + ChatColor.GRAY + event.getPlayer().getName());
         miniGame.getTeamsManager().removePlayerToQueue(event.getPlayer());
 
-        System.out.println("Player in queue:");
-        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+//        DEBUGGING QUEUE QUIT
+//        System.out.println("Player in queue:");
+//        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
     }
 
     @EventHandler
