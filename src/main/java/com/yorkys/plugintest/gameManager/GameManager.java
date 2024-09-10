@@ -1,19 +1,24 @@
 package com.yorkys.plugintest.gameManager;
 
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.teams.TeamsManager;
 
 public class GameManager {
     private MiniGame miniGame;
-    private TeamsManager teamsManager;
 
     public GameManager(MiniGame miniGame) {
         this.miniGame = miniGame;
-        teamsManager = miniGame.getTeamsManager();
 
     }
 
     public boolean start() {
-        return teamsManager.formTeams();
+        if (miniGame.getTeamsManager().formTeams()) {
+            try {
+                miniGame.getGeneratorManager().createAllGenerators();
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
+        }
+        return  false;
     }
 }
