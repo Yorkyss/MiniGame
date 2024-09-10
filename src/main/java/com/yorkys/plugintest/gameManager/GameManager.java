@@ -17,8 +17,14 @@ public class GameManager {
             } catch (Exception e) {
                 return false;
             }
+            miniGame.getNpcManager().spawnAllNPCs();
+
             return true;
         }
         return  false;
+    }
+
+    public void stop() {
+        miniGame.getNpcManager().removeAllNPCs();
     }
 }
