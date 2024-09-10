@@ -41,7 +41,7 @@ public final class MiniGame {
     }
 
     public void onDisable() {
-
+        gameManager.stop();
     }
 
     private void registerCommands() {
