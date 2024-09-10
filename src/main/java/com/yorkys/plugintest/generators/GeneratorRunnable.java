@@ -20,24 +20,24 @@ public class GeneratorRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (generator.getCurrentUpgradeTime() == 0) {
+        if (generator.getCurrentLevel() < generator.getMaxLevel() && generator.getCurrentUpgradeTime() == 0) {
             generator.increaseLevel();
             generator.setCurrentUpgradeTime(generator.getUpgradeTime());
         }
 
         if (generator.getCurrentSpawnTime() <= 0) {
-            World world = generator.getLoc().getWorld();
-            Collection<Entity> entityCollection = world.getNearbyEntities(generator.getLoc(), 1, 1, 1);
+            World world = generator.getLocation().getWorld();
+            Collection<Entity> entityCollection = world.getNearbyEntities(generator.getLocation(), 1, 1, 1);
             long itemsOnGround = entityCollection.stream()
-                    .filter(entity -> entity instanceof Item) // Filter items
-                    .map(entity -> (Item) entity) // Cast to Item
-                    .map(Item::getItemStack) // Get ItemStack from Item
-                    .filter(itemStack -> itemStack.getType() == generator.getItemMaterial()) // Filter by material
-                    .mapToLong(ItemStack::getAmount) // Get amount of each ItemStack
-                    .sum(); // Sum the amounts
+                    .filter(entity -> entity instanceof Item)
+                    .map(entity -> (Item) entity)
+                    .map(Item::getItemStack)
+                    .filter(itemStack -> itemStack.getType() == generator.getItemMaterial())
+                    .mapToLong(ItemStack::getAmount)
+                    .sum();
 
             if (itemsOnGround < generator.getMaxStackSize()) {
-                generator.getLoc().getWorld().dropItem(generator.getLoc(), generator.getItemStack()).setVelocity(new Vector(0, 0, 0));
+                generator.getLocation().getWorld().dropItem(generator.getLocation(), generator.getItemStack()).setVelocity(new Vector(0, 0, 0));
                 generator.setCurrentSpawnTime(generator.getSpawnTime());
             }
         }
