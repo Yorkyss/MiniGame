@@ -10,6 +10,6 @@ public class ConfigManager {
     private final SettingsConfig settingsConfig;
 
     public ConfigManager(MiniGame miniGame) {
-        this.settingsConfig = new SettingsConfig(miniGame.getPlugin().getConfig());
+        this.settingsConfig = new SettingsConfig(miniGame.getPlugin().getConfig(), miniGame);
     }
 }
