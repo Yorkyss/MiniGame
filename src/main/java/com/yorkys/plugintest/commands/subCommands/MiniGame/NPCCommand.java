@@ -11,6 +11,6 @@ public class NPCCommand extends SubCommand {
 
     @Override
     public void execute(Player player, String[] args) {
-        mgCommand.getMiniGame().getNpcManager().createNPC(new VillagerNPC("&e&lSHOP", "shop", player.getLocation(), false));
+        mgCommand.getMiniGame().getNpcManager().createNPC(new VillagerNPC("&e&lSHOP", "shop", player.getLocation()));
     }
 }

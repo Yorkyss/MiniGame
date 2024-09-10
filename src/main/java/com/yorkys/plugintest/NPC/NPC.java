@@ -2,11 +2,9 @@ package com.yorkys.plugintest.NPC;
 
 import net.minecraft.server.v1_8_R3.Entity;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Villager;
+
+import java.lang.reflect.Field;
 
 public class NPC {
     protected String customName;
@@ -14,24 +12,31 @@ public class NPC {
     protected Location location;
 
     protected Entity nmsEntity;
+
     protected boolean hasAI;
+    protected boolean invulnerable;
+    protected boolean silent;
 
 
-    public NPC(String customName, String ID, Location location, boolean hasAI) {
+    public NPC(String customName, String ID, Location location) {
         this.customName = customName;
         this.ID = ID;
         this.location = location;
-        this.hasAI = hasAI;
     }
 
     public void spawn() {
-        Villager villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
-
-        nmsEntity = ((CraftEntity) villager).getHandle();
-        setAI(hasAI());
-
-        villager.setCustomName(ChatColor.translateAlternateColorCodes('&', customName));
-        villager.setCustomNameVisible(true);
+//        EXAMPLE:
+//        (Entity [villager] should be declared as global variable)
+//
+//        Villager villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
+//        villager.setCustomName(ChatColor.translateAlternateColorCodes('&', customName));
+//        villager.setCustomNameVisible(true);
+//        villager.setRemoveWhenFarAway(false);
+//        setAI(hasAI);
+//        setSilent(silent);
+//        setInvunerable(villager, invulnerable);
+//
+//        nmsEntity = ((CraftEntity) villager).getHandle();
     }
 
     public void setAI(boolean value) {
@@ -43,6 +48,18 @@ public class NPC {
         }
         nmsEntity.c(tag);
         tag.setInt("NoAI", ai);
+        nmsEntity.f(tag);
+    }
+
+    public void setSilent(boolean value) {
+        int silent = value ? 1 : 0;
+
+        NBTTagCompound tag = nmsEntity.getNBTTag();
+        if(tag == null) {
+            tag = new NBTTagCompound();
+        }
+        nmsEntity.c(tag);
+        tag.setInt("Silent", silent);
         nmsEntity.f(tag);
     }
 
