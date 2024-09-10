@@ -2,7 +2,14 @@ package com.yorkys.plugintest.NPC;
 
 import net.minecraft.server.v1_8_R3.Entity;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Villager;
+
+import java.util.UUID;
 
 public class NPC {
     protected String customName;
@@ -24,17 +31,16 @@ public class NPC {
 
     public void spawn() {
 //        EXAMPLE:
-//        (Entity [villager] should be declared as global variable)
-//
+//        Entity villager should be declared as global variable
+
 //        Villager villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
 //        villager.setCustomName(ChatColor.translateAlternateColorCodes('&', customName));
 //        villager.setCustomNameVisible(true);
 //        villager.setRemoveWhenFarAway(false);
-//        setAI(hasAI);
-//        setSilent(silent);
-//        setInvunerable(villager, invulnerable);
 //
 //        nmsEntity = ((CraftEntity) villager).getHandle();
+//        setAI(hasAI);
+//        setSilent(silent);
     }
 
     public void setAI(boolean value) {
@@ -75,5 +81,13 @@ public class NPC {
 
     public boolean hasAI() {
         return hasAI;
+    }
+
+    public void removeNPC() {
+        nmsEntity.getBukkitEntity().remove();
+    }
+
+    public UUID getUUID() {
+        return nmsEntity.getUniqueID();
     }
 }
