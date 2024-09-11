@@ -10,6 +10,7 @@ public class MGPlayer {
 
     private PlayerType type;
     private Team team = null;
+    private int stars = 0;
 
     public MGPlayer(Player player) {
         this.player = player;
@@ -37,5 +38,18 @@ public class MGPlayer {
 
         this.type = type;
         return true;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void resetStars() {
+        stars = 0;
+    }
+
+    public void updateStars(int value) {
+        stars += value;
+        team.updateRedStars();
     }
 }
