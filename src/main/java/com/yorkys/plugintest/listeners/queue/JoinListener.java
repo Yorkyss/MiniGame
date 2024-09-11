@@ -16,7 +16,8 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        event.setJoinMessage(ChatColor.GREEN + "+" + ChatColor.GRAY + event.getPlayer().getName());
+        event.setJoinMessage(ChatColor.GREEN + "+ " + ChatColor.GRAY + event.getPlayer().getName());
+        event.setJoinMessage(ChatColor.GREEN + "+ " + ChatColor.GRAY + event.getPlayer().getName());
         miniGame.getTeamsManager().addPlayerToQueue(event.getPlayer());
 
 //        DEBUGGING QUEUE JOIN
@@ -26,7 +27,7 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(ChatColor.RED + "+" + ChatColor.GRAY + event.getPlayer().getName());
+        event.setQuitMessage(ChatColor.RED + "- " + ChatColor.GRAY + event.getPlayer().getName());
         miniGame.getTeamsManager().removePlayerToQueue(event.getPlayer());
 
 //        DEBUGGING QUEUE QUIT
