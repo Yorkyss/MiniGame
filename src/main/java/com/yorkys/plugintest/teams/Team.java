@@ -12,6 +12,9 @@ public class Team {
     private int maxSize;
     private MiniGame miniGame;
 
+    private int blueStars = 0;
+    private int redStars = 0;
+
     public Team (String color, int maxSize, MiniGame miniGame) {
         this.color = color;
         this.maxSize = maxSize;
@@ -74,5 +77,35 @@ public class Team {
                 .filter(MGPlayer -> MGPlayer.getType() == type)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void addBlueStar(int value) {
+        blueStars += value;
+    }
+
+    public void removeBlueStar(int value) {
+        blueStars -= value;
+    }
+
+    public void resetBlueStars() {
+        blueStars = 0;
+    }
+
+    public int getBlueStars() {
+        return blueStars;
+    }
+
+    public void updateRedStars() {
+        int newRedStars = mgPlayers.stream().mapToInt(MGPlayer::getStars).sum();
+        redStars = newRedStars;
+    }
+
+    public int getRedStars() {
+        return redStars;
+    }
+
+    public void resetRedStars() {
+        mgPlayers.forEach(MGPlayer::resetStars);
+        redStars = 0;
     }
 }
