@@ -9,6 +9,8 @@ public class MGPlayer {
     private final Player player;
 
     private PlayerType type;
+    private boolean playing = false;
+    private boolean spectator = false;
     private Team team = null;
     private int stars = 0;
 
@@ -51,5 +53,21 @@ public class MGPlayer {
     public void updateStars(int value) {
         stars += value;
         team.updateRedStars();
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public boolean isSpectator() {
+        return spectator;
+    }
+
+    public void setPlaying(boolean value) {
+        playing = value;
+    }
+
+    public void setSpectator(boolean value) {
+        spectator = value;
     }
 }
