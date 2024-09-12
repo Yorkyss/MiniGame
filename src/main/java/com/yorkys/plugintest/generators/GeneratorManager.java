@@ -24,6 +24,10 @@ public class GeneratorManager {
         miniGame.getConfigManager().getSettingsConfig().getGenerators().forEach(this::spawnGenerator);
     }
 
+    public void removeAllGenerators() {
+        miniGame.getConfigManager().getSettingsConfig().getGenerators().forEach(Generator::remove);
+    }
+
     public boolean removeGenerator(String name) {
         boolean generatorExist = false;
         Iterator<Generator> iterator = generatorsList.iterator();
