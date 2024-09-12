@@ -21,7 +21,7 @@ public class SettingsMenu extends Menu {
         super(miniGame, player, 9*3);
         this.miniGame = miniGame;
         this.player = player;
-        mgPlayer = miniGame.getTeamsManager().getMGPlayerFromPlayer(player);
+        mgPlayer = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player);
     }
 
     @Override

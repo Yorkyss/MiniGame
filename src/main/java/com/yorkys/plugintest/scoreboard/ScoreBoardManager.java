@@ -37,18 +37,26 @@ public final class ScoreBoardManager {
     }
 
     public void createNewScoreboard(Player player) {
-        if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
-            QueueScoreBoard.createNewScoreboard(player, miniGame);
-        } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
-            MatchScoreBoard.createNewScoreboard(player, miniGame);
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator()) {
+            SpectatorScoreBoard.createNewScoreboard(player, miniGame);
+        } else {
+            if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
+                QueueScoreBoard.createNewScoreboard(player, miniGame);
+            } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+                MatchScoreBoard.createNewScoreboard(player, miniGame);
+            }
         }
     }
 
     public void updateScoreboard(Player player) {
-        if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
-            QueueScoreBoard.updateScoreBoard(player, miniGame);
-        } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
-            MatchScoreBoard.updateScoreBoard(player, miniGame);
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator()) {
+            SpectatorScoreBoard.updateScoreBoard(player, miniGame);
+        } else {
+            if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
+                QueueScoreBoard.updateScoreBoard(player, miniGame);
+            } else if (miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+                MatchScoreBoard.updateScoreBoard(player, miniGame);
+            }
         }
     }
 }

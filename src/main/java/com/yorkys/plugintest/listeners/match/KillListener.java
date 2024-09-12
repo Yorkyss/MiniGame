@@ -17,7 +17,7 @@ public class KillListener implements Listener {
     @EventHandler
     public void onEntityInteract(PlayerDeathEvent event) {
         Player deadPlayer = event.getEntity();
-        MGPlayer deadPlayerMGP = miniGame.getTeamsManager().getMGPlayerFromPlayer(deadPlayer);
+        MGPlayer deadPlayerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(deadPlayer);
 
         if (deadPlayer.getKiller() == null) {
             event.setDeathMessage(ChatColor.GRAY + deadPlayer.getName() + " è morto");
@@ -27,7 +27,7 @@ public class KillListener implements Listener {
         }
 
         Player killer = event.getEntity().getKiller();
-        MGPlayer killerMGP = miniGame.getTeamsManager().getMGPlayerFromPlayer(killer);
+        MGPlayer killerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(killer);
 
 
         int stars = deadPlayerMGP.getStars() < 1 ? 1 : deadPlayerMGP.getStars() * 2;

@@ -1,7 +1,6 @@
 package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.gameManager.GameStates;
 import com.yorkys.plugintest.players.MGPlayer;
 import org.bukkit.entity.Player;
 
@@ -22,28 +21,18 @@ public class TeamsManager {
         redTeam = new Team("red", 1, miniGame);
     }
 
-
-    public boolean addPlayerToQueue(Player player) {
-        if (miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
-            mgPlayers.add(new MGPlayer(player));
-            return true;
+    public boolean formQueue() {
+        if (miniGame.getMgPlayersManager().getMgPlayers().size() < minMaxPlayer) {
+            System.out.println("Non ci sono abbastanza giocatori per formare le squadre.");
+            return false;
         }
-        return false;
-    }
-
-    public boolean removePlayerToQueue(Player player) {
-        if (miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
-            MGPlayer mgp = getMGPlayerFromPlayer(player);
-            if (mgp == null) return true;
-            mgp.setTeam(null);
-            mgPlayers.remove(getMGPlayerFromPlayer(player));
-            return true;
-        }
-        return false;
+        mgPlayers = miniGame.getMgPlayersManager().getMgPlayers().subList(0, minMaxPlayer);
+        formTeams();
+        return true;
     }
 
     public boolean addGreenPlayer(Player player) {
-        MGPlayer mgp = getMGPlayerFromPlayer(player);
+        MGPlayer mgp = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player);
         if (mgp != null) {
             if (greenTeam.addPlayer(mgp)) {
                 if (!mgPlayers.contains(mgp)) mgPlayers.add(mgp);
@@ -54,7 +43,7 @@ public class TeamsManager {
     }
 
     public boolean addRedPlayer(Player player) {
-        MGPlayer mgp = getMGPlayerFromPlayer(player);
+        MGPlayer mgp = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player);
         if (mgp != null) {
             if (redTeam.addPlayer(mgp)) {
                 if (!mgPlayers.contains(mgp)) mgPlayers.add(mgp);
@@ -64,12 +53,7 @@ public class TeamsManager {
         return false;
     }
 
-    public boolean formTeams() {
-        if (mgPlayers.size() < minMaxPlayer) {
-            System.out.println("Non ci sono abbastanza giocatori per formare le squadre.");
-            return false;
-        }
-
+    public void formTeams() {
         List<MGPlayer> noTeamPlayers = new ArrayList<>(mgPlayers.stream()
                 .filter(p -> (p.getTeam() == null))
                 .toList());
@@ -92,8 +76,6 @@ public class TeamsManager {
         redTeam.giveRoles();
 
         teleportTeams();
-
-        return  true;
     }
 
     private void teleportTeams() {
@@ -112,12 +94,5 @@ public class TeamsManager {
 
     public List<MGPlayer> getMgPlayers() {
         return  mgPlayers;
-    }
-
-    public MGPlayer getMGPlayerFromPlayer(Player player) {
-        return mgPlayers.stream()
-                .filter(p -> p.getPlayer().getUniqueId().equals(player.getUniqueId()))
-                .findFirst()
-                .orElse(null);
     }
 }

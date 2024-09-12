@@ -12,7 +12,7 @@ public class GameManager {
     }
 
     public boolean start() {
-        if (miniGame.getTeamsManager().formTeams()) {
+        if (miniGame.getTeamsManager().formQueue()) {
             try {
                 miniGame.getGeneratorManager().createAllGenerators();
             } catch (Exception e) {

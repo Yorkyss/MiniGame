@@ -17,12 +17,10 @@ public class MatchScoreBoard {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         objective.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "MINIGAME");
 
-        objective.getScore(ChatColor.WHITE + " ").setScore(6);
+        objective.getScore(ChatColor.WHITE + " ").setScore(3);
 
-        objective.getScore(ChatColor.WHITE + "In attesa di players..").setScore(4);
-        objective.getScore(ChatColor.RED + " ").setScore(3);
+        objective.getScore(ChatColor.RED + " ").setScore(1);
 
-        objective.getScore(ChatColor.GREEN + " ").setScore(1);
         objective.getScore(ChatColor.WHITE + Bukkit.getIp()).setScore(0);
 
         String teamKey1 = ChatColor.WHITE.toString();
@@ -30,13 +28,13 @@ public class MatchScoreBoard {
         Team team1 = scoreboard.registerNewTeam("team1");
         team1.addEntry(teamKey1);
         team1.setPrefix(ChatColor.WHITE + "Team: ");
-        if (miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam().getColor());
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
+            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
         } else {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }
 
-        objective.getScore(teamKey1).setScore(5);
+        objective.getScore(teamKey1).setScore(2);
 
         player.setScoreboard(scoreboard);
     }
@@ -48,8 +46,8 @@ public class MatchScoreBoard {
         Scoreboard scoreboard = player.getScoreboard();
         Team team1 = scoreboard.getTeam("team1");
 
-        if (miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam().getColor());
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
+            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
         } else {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }

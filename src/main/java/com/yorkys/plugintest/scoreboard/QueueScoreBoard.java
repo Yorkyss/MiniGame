@@ -31,8 +31,8 @@ public class QueueScoreBoard {
         Team team1 = scoreboard.registerNewTeam("team1");
         team1.addEntry(teamKey1);
         team1.setPrefix(ChatColor.WHITE + "Team: ");
-        if (miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam().getColor());
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
+            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
         } else {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }
@@ -56,8 +56,8 @@ public class QueueScoreBoard {
         Team team1 = scoreboard.getTeam("team1");
         Team team2 = scoreboard.getTeam("team2");
 
-        if (miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam().getColor());
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
+            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
         } else {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }
