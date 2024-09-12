@@ -36,11 +36,6 @@ public class JoinListener implements Listener {
         event.setQuitMessage(ChatColor.RED + "- " + ChatColor.GRAY + event.getPlayer().getName());
 
         miniGame.getMgPlayersManager().removePlayer(event.getPlayer());
-
-//        DEBUGGING QUEUE QUIT
-        System.out.println("Player in queue:");
-        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
-//        DEBUGGING QUEUE QUIT
     }
 
     @EventHandler
