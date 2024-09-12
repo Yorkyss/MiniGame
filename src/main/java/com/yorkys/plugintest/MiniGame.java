@@ -11,6 +11,7 @@ import com.yorkys.plugintest.listeners.match.KillListener;
 import com.yorkys.plugintest.listeners.queue.JoinListener;
 import com.yorkys.plugintest.listeners.queue.MenuListener;
 import com.yorkys.plugintest.listeners.match.NPCListener;
+import com.yorkys.plugintest.scoreboard.ScoreBoardManager;
 import com.yorkys.plugintest.teams.TeamsManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -25,6 +26,7 @@ public final class MiniGame {
     private final InventoryManager inventoryManager;
     private final ConfigManager configManager;
     private final NPCManager npcManager;
+    private final ScoreBoardManager scoreBoardManager;
 
     MiniGame(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -34,6 +36,7 @@ public final class MiniGame {
         inventoryManager = new InventoryManager(this);
         npcManager = new NPCManager(this);
         configManager = new ConfigManager(this);
+        scoreBoardManager = new ScoreBoardManager(this);
     }
 
     public void onEnable() {
@@ -42,6 +45,7 @@ public final class MiniGame {
     }
 
     public void onDisable() {
+        scoreBoardManager.cancelTask();
         gameManager.stop();
     }
 
