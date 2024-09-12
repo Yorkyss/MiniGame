@@ -12,7 +12,10 @@ public class MGPlayer {
     private boolean playing = false;
     private boolean spectator = false;
     private Team team = null;
+
     private int stars = 0;
+    private int kills = 0;
+    private int deaths = 0;
 
     public MGPlayer(Player player) {
         this.player = player;
@@ -48,6 +51,7 @@ public class MGPlayer {
 
     public void resetStars() {
         stars = 0;
+        team.updateRedStars();
     }
 
     public void updateStars(int value) {
@@ -69,5 +73,21 @@ public class MGPlayer {
 
     public void setSpectator(boolean value) {
         spectator = value;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths += deaths;
+    }
+
+    public void setKills(int kills) {
+        this.kills += kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public int getKills() {
+        return kills;
     }
 }
