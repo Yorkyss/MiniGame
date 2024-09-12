@@ -9,11 +9,11 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-public class QueueScoreBoard {
+public class MatchScoreBoard {
 
     public static void createNewScoreboard(Player player, MiniGame miniGame) {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective("queue", "MiniGame");
+        Objective objective = scoreboard.registerNewObjective("match", "MiniGame");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         objective.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "MINIGAME");
 
@@ -26,7 +26,6 @@ public class QueueScoreBoard {
         objective.getScore(ChatColor.WHITE + Bukkit.getIp()).setScore(0);
 
         String teamKey1 = ChatColor.WHITE.toString();
-        String teamKey2 = ChatColor.GRAY.toString();
 
         Team team1 = scoreboard.registerNewTeam("team1");
         team1.addEntry(teamKey1);
@@ -37,30 +36,22 @@ public class QueueScoreBoard {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }
 
-        Team team2 = scoreboard.registerNewTeam("team2");
-        team2.addEntry(teamKey2);
-        team2.setPrefix(ChatColor.WHITE + "Players: ");
-        team2.setSuffix(ChatColor.RED + String.valueOf(Bukkit.getOnlinePlayers().size()) + ChatColor.GRAY + "/" + ChatColor.GREEN + "6");
-
         objective.getScore(teamKey1).setScore(5);
-        objective.getScore(teamKey2).setScore(2);
 
         player.setScoreboard(scoreboard);
     }
 
     public static void updateScoreBoard(Player player, MiniGame miniGame) {
-        if (player.getScoreboard().getObjective("queue") != null) {
+        if (player.getScoreboard().getObjective("match") != null) {
             createNewScoreboard(player, miniGame);
         }
         Scoreboard scoreboard = player.getScoreboard();
         Team team1 = scoreboard.getTeam("team1");
-        Team team2 = scoreboard.getTeam("team2");
 
         if (miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam() != null) {
             team1.setSuffix(ChatColor.WHITE + "" + miniGame.getTeamsManager().getMGPlayerFromPlayer(player).getTeam().getColor());
         } else {
             team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
         }
-        team2.setSuffix(ChatColor.RED + String.valueOf(Bukkit.getOnlinePlayers().size()) + ChatColor.GRAY + "/" + ChatColor.GREEN + "6");
     }
 }

@@ -3,10 +3,8 @@ package com.yorkys.plugintest.scoreboard;
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.gameManager.GameStates;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.*;
 
 public final class ScoreBoardManager {
 
@@ -41,12 +39,16 @@ public final class ScoreBoardManager {
     public void createNewScoreboard(Player player) {
         if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
             QueueScoreBoard.createNewScoreboard(player, miniGame);
+        } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+            MatchScoreBoard.createNewScoreboard(player, miniGame);
         }
     }
 
     public void updateScoreboard(Player player) {
         if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
             QueueScoreBoard.updateScoreBoard(player, miniGame);
+        } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+            MatchScoreBoard.updateScoreBoard(player, miniGame);
         }
     }
 }
