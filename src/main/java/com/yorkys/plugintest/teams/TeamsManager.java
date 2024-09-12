@@ -89,6 +89,14 @@ public class TeamsManager {
         });
     }
 
+    public void resetQueue() {
+        mgPlayers = new ArrayList<>();
+        miniGame.getMgPlayersManager().getMgPlayers().forEach(mgPlayer -> {
+            mgPlayer.setPlaying(false);
+            mgPlayer.setSpectator(false);
+        });
+    }
+
     public Team getGreenTeam() {
         return greenTeam;
     }
