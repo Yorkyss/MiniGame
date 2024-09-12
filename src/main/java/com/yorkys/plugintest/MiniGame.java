@@ -7,6 +7,7 @@ import com.yorkys.plugintest.config.ConfigManager;
 import com.yorkys.plugintest.gameManager.GameManager;
 import com.yorkys.plugintest.generators.GeneratorManager;
 import com.yorkys.plugintest.inventory.InventoryManager;
+import com.yorkys.plugintest.listeners.GeneralListener;
 import com.yorkys.plugintest.listeners.match.KillListener;
 import com.yorkys.plugintest.listeners.queue.JoinListener;
 import com.yorkys.plugintest.listeners.queue.MenuListener;
@@ -62,6 +63,7 @@ public final class MiniGame {
         plugin.getServer().getPluginManager().registerEvents(new MenuListener(this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new NPCListener(this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new KillListener(this), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new GeneralListener(this), plugin);
     }
 
     public BukkitTask runTask(Runnable runnable){
