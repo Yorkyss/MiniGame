@@ -27,8 +27,11 @@ public class GameManager {
     }
 
     public void stop() {
-        miniGame.getNpcManager().removeAllNPCs(miniGame.getConfigManager().getSettingsConfig().shopNPCID);
         gameState = GameStates.FINISHING;
+        miniGame.getNpcManager().removeAllNPCs(miniGame.getConfigManager().getSettingsConfig().shopNPCID);
+        miniGame.getGeneratorManager().removeAllGenerators();
+        miniGame.getTeamsManager().resetQueue();
+        gameState = GameStates.QUEUE;
     }
 
     public GameStates getGameState() {
