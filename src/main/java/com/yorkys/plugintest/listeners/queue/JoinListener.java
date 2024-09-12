@@ -21,8 +21,10 @@ public class JoinListener implements Listener {
         miniGame.getTeamsManager().addPlayerToQueue(event.getPlayer());
 
 //        DEBUGGING QUEUE JOIN
-//        System.out.println("Player in queue:");
-//        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+        System.out.println("Player in queue:");
+        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+//        DEBUGGING QUEUE QUIT
+
     }
 
     @EventHandler
@@ -31,8 +33,9 @@ public class JoinListener implements Listener {
         miniGame.getTeamsManager().removePlayerToQueue(event.getPlayer());
 
 //        DEBUGGING QUEUE QUIT
-//        System.out.println("Player in queue:");
-//        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+        System.out.println("Player in queue:");
+        miniGame.getTeamsManager().getMgPlayers().forEach(p -> System.out.println(p.getPlayer().getName()));
+//        DEBUGGING QUEUE QUIT
     }
 
     @EventHandler
