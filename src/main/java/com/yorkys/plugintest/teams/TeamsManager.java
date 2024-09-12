@@ -1,6 +1,7 @@
 package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
+import com.yorkys.plugintest.gameManager.GameStates;
 import com.yorkys.plugintest.players.MGPlayer;
 import org.bukkit.entity.Player;
 
@@ -22,15 +23,23 @@ public class TeamsManager {
     }
 
 
-    public void addPlayerToQueue (Player player) {
-        mgPlayers.add(new MGPlayer(player));
+    public boolean addPlayerToQueue(Player player) {
+        if (miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+            mgPlayers.add(new MGPlayer(player));
+            return true;
+        }
+        return false;
     }
 
-    public void removePlayerToQueue (Player player) {
-        MGPlayer mgp = getMGPlayerFromPlayer(player);
-        if (mgp == null) return;
-        mgp.setTeam(null);
-        mgPlayers.remove(getMGPlayerFromPlayer(player));
+    public boolean removePlayerToQueue(Player player) {
+        if (miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
+            MGPlayer mgp = getMGPlayerFromPlayer(player);
+            if (mgp == null) return true;
+            mgp.setTeam(null);
+            mgPlayers.remove(getMGPlayerFromPlayer(player));
+            return true;
+        }
+        return false;
     }
 
     public boolean addGreenPlayer(Player player) {
