@@ -2,7 +2,9 @@ package com.yorkys.plugintest.teams;
 
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.MGPlayer;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class TeamsManager {
             }
         });
         formTeams();
+        giveBelowNameScoreboards();
         return true;
     }
 
@@ -118,5 +121,25 @@ public class TeamsManager {
 
     public int getMinMaxPlayer() {
         return minMaxPlayer;
+    }
+
+    public void giveBelowNameScoreboards() {
+        mgPlayers.forEach(mgPlayer -> {
+            Scoreboard scoreboard = mgPlayer.getPlayer().getScoreboard();
+
+            Objective healthObjective = scoreboard.registerNewObjective("health", "health");
+            healthObjective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+            healthObjective.setDisplayName(ChatColor.RED + "❤");
+
+            mgPlayer.getPlayer().setScoreboard(scoreboard);
+            mgPlayer.getPlayer().setHealth(mgPlayer.getPlayer().getHealth());
+        });
+    }
+
+    public MGPlayer getMGPlayer(Player player) {
+        return mgPlayers.stream()
+                .filter(p -> p.getPlayer().getUniqueId().equals(player.getUniqueId()))
+                .findFirst()
+                .orElse(null);
     }
 }
