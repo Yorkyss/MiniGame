@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 @RequiredArgsConstructor
 public class KillListener implements Listener {
@@ -19,9 +20,25 @@ public class KillListener implements Listener {
 
     @EventHandler
     public void onEntityInteract(PlayerDeathEvent event) {
-        // SETTING DEAD STARS
         Player deadPlayer = event.getEntity();
         MGPlayer deadPlayerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(deadPlayer);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (deadPlayer.isOnline() && deadPlayer.isDead()) {
+                    deadPlayer.spigot().respawn();
+                    deadPlayerMGP.setSpectator(true);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            deadPlayerMGP.setSpectator(false);
+                        }
+                    }.runTaskLater(miniGame.getPlugin(), 90);
+                }
+            }
+        }.runTaskLater(miniGame.getPlugin(), 1L);
+
+        // SETTING DEAD STARS
 
         if (miniGame.getGameManager().getGameState() != GameStates.PLAYING || deadPlayerMGP.isSpectator()) {
             return;
