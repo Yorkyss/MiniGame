@@ -3,22 +3,25 @@ package com.yorkys.plugintest.teams;
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.players.MGPlayer;
 import com.yorkys.plugintest.players.PlayerType;
+import org.bukkit.ChatColor;
 
 import java.util.*;
 
 public class Team {
     private List<MGPlayer> mgPlayers = new ArrayList<>();
     private String color;
+    private ChatColor chatColor;
     private int maxSize;
     private MiniGame miniGame;
 
     private int blueStars = 0;
     private int redStars = 0;
 
-    public Team (String color, int maxSize, MiniGame miniGame) {
+    public Team (String color, int maxSize, ChatColor chatColor, MiniGame miniGame) {
         this.color = color;
         this.maxSize = maxSize;
         this.miniGame = miniGame;
+        this.chatColor = chatColor;
     }
 
     public void giveRoles() {
@@ -107,5 +110,9 @@ public class Team {
     public void resetRedStars() {
         mgPlayers.forEach(MGPlayer::resetStars);
         redStars = 0;
+    }
+
+    public ChatColor getChatColor() {
+        return chatColor;
     }
 }
