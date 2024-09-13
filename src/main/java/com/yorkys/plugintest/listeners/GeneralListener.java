@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 @RequiredArgsConstructor
 public class GeneralListener implements Listener {
@@ -46,5 +47,13 @@ public class GeneralListener implements Listener {
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onItemPickUP(PlayerPickupItemEvent event) {
+        if (miniGame.getGameManager().getGameState() != GameStates.PLAYING
+                || miniGame.getMgPlayersManager().getMGPlayerFromPlayer(event.getPlayer()).isSpectator()) {
+            event.setCancelled(true);
+        }
     }
 }
