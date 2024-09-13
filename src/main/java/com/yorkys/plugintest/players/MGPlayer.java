@@ -2,6 +2,10 @@ package com.yorkys.plugintest.players;
 
 import com.yorkys.plugintest.teams.Team;
 import lombok.Getter;
+import net.minecraft.server.v1_8_R3.Entity;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @Getter
@@ -72,7 +76,20 @@ public class MGPlayer {
     }
 
     public void setSpectator(boolean value) {
+        player.setGameMode(value ? GameMode.ADVENTURE : GameMode.SURVIVAL);
+        if (value) {
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (pl != null) pl.hidePlayer(player);
+            }
+        } else {
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (pl != null) pl.showPlayer(player);
+            }
+        }
+
+        player.setAllowFlight(value);
         spectator = value;
+        // teleport spectator to the top center of the map
     }
 
     public void setDeaths(int deaths) {
