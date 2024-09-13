@@ -37,6 +37,8 @@ public class GeneralListener implements Listener {
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (((Player) event.getEntity()).getPlayer());
+        Player damager = (((Player) event.getDamager()).getPlayer());
+        if (!(event.getEntity() instanceof Player) || !miniGame.getMgPlayersManager().getMGPlayerFromPlayer(damager).isSpectator()) return;
 
         if (miniGame.getGameManager().getGameState() != GameStates.PLAYING
                 || miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator()) {
