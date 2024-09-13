@@ -19,8 +19,8 @@ public class TeamsManager {
 
     public TeamsManager(MiniGame miniGame) {
         this.miniGame = miniGame;
-        greenTeam = new Team("green", 1, miniGame);
-        redTeam = new Team("red", 1, miniGame);
+        greenTeam = new Team("green", 1, ChatColor.GREEN, miniGame);
+        redTeam = new Team("red", 1, ChatColor.RED, miniGame);
     }
 
     public boolean formQueue() {
@@ -29,6 +29,8 @@ public class TeamsManager {
             return false;
         }
         mgPlayers = miniGame.getMgPlayersManager().getMgPlayers().subList(0, minMaxPlayer);
+        formTeams();
+        giveBelowNameScoreboards();
         mgPlayers.forEach(mgPlayer -> {
             mgPlayer.setPlaying(true);
             mgPlayer.getPlayer().getInventory().clear();
@@ -41,8 +43,6 @@ public class TeamsManager {
                 // give spectator kit
             }
         });
-        formTeams();
-        giveBelowNameScoreboards();
         return true;
     }
 
@@ -104,6 +104,7 @@ public class TeamsManager {
         miniGame.getMgPlayersManager().getMgPlayers().forEach(mgPlayer -> {
             mgPlayer.setPlaying(false);
             mgPlayer.setSpectator(false);
+            mgPlayer.resetStats();
         });
     }
 
