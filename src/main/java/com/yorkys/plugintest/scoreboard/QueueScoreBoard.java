@@ -32,9 +32,9 @@ public class QueueScoreBoard {
         objective.getScore(ChatColor.BLACK + " ").setScore(3);
 
         if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            objective.getScore(ChatColor.WHITE + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor()).setScore(7);
+            objective.getScore(ChatColor.WHITE + "Team: " + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor()).setScore(2);
         } else {
-            objective.getScore(ChatColor.WHITE + "nessuno").setScore(2);
+            objective.getScore(ChatColor.WHITE + "Team: nessuno").setScore(2);
         }
 
         objective.getScore(ChatColor.GREEN + " ").setScore(1);
