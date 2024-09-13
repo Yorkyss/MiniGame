@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -64,12 +65,20 @@ public class GeneralListener implements Listener {
     }
 
     @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event) {
+        if (miniGame.getGameManager().getGameState() != GameStates.PLAYING
+                || miniGame.getMgPlayersManager().getMGPlayerFromPlayer(event.getPlayer()).isSpectator()) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (miniGame.getGameManager().getGameState() != GameStates.PLAYING
                 || miniGame.getMgPlayersManager().getMGPlayerFromPlayer(event.getPlayer()).isSpectator()) {
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && (event.getClickedBlock().getType() == Material.CHEST || event.getClickedBlock().getType() == Material.ENDER_CHEST)) {
-            event.setCancelled(true);
-        }
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && (event.getClickedBlock().getType() == Material.CHEST || event.getClickedBlock().getType() == Material.ENDER_CHEST)) {
+                event.setCancelled(true);
+            }
         }
     }
 }
