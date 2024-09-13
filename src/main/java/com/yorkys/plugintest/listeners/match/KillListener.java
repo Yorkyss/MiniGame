@@ -50,17 +50,19 @@ public class KillListener implements Listener {
             deadPlayerMGP.resetStars();
             return;
         }
-        deadPlayerMGP.resetStars();
 
         // SETTING KILLER STARS
         Player killer = event.getEntity().getKiller();
         MGPlayer killerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(killer);
 
         int stars = deadPlayerMGP.getStars() < 1 ? 1 : deadPlayerMGP.getStars() * 2;
+        System.out.println(deadPlayerMGP.getStars());
+        System.out.println(stars);
         killerMGP.updateStars(stars);
         String starsWord = stars == 1 ? " stella " : " stelle ";
-        event.setDeathMessage(ChatColor.AQUA + killer.getName() + ChatColor.GRAY + " ha rubato " + stars + starsWord + "rosse uccidendo " + ChatColor.YELLOW + deadPlayer.getName());
-
+        Bukkit.getServer().broadcastMessage(ChatColor.AQUA + killer.getName() + ChatColor.GRAY + " ha rubato " + stars + starsWord + "rosse uccidendo " + ChatColor.YELLOW + deadPlayer.getName());
+        event.setDeathMessage("");
+        deadPlayerMGP.resetStars();
 
         // BLUE STARS AND FINISH GAME CHECK
         if (killerMGP.getTeam().getRedStars() >= 30) {
