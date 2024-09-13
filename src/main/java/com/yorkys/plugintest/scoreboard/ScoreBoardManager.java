@@ -14,8 +14,6 @@ public final class ScoreBoardManager {
 
     private final MiniGame miniGame;
     private BukkitRunnable task;
-    private Scoreboard mainBoard;
-
 
     public ScoreBoardManager(MiniGame miniGame) {
         this.miniGame = miniGame;
@@ -58,22 +56,18 @@ public final class ScoreBoardManager {
 
         if (mgPlayer == null || !mgPlayer.isPlaying()) return;
 
-        // Crea o recupera il team per il giocatore
         Team team = board.getTeam(player.getName());
         if (team == null) {
             team = board.registerNewTeam(player.getName());
         }
 
-        // Imposta il prefisso del team
         String prefix = mgPlayer.getTeam().getChatColor() + ""; // Personalizza il prefisso come desideri
         String suffix =  ChatColor.GRAY + " " + mgPlayer.getStars() + ChatColor.DARK_RED + "★";
         team.setPrefix(prefix);
         team.setSuffix(suffix);
 
-        // Aggiungi il giocatore al team
         team.addEntry(player.getName());
 
-        // Aggiungi il team a tutti i giocatori
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             onlinePlayer.setScoreboard(board);
         }

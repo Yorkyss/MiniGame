@@ -15,7 +15,6 @@ public class MatchScoreBoard {
         Scoreboard board = player.getScoreboard();
         Objective objective = board.getObjective("match");
 
-        // Crea la scoreboard se non esiste ancora
         if (objective == null) {
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             board = manager.getNewScoreboard();
@@ -23,7 +22,6 @@ public class MatchScoreBoard {
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
-        // Reset dei punteggi esistenti per evitare duplicazioni
         for (String entry : board.getEntries()) {
             board.resetScores(entry);
         }
