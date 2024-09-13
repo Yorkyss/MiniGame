@@ -2,6 +2,7 @@ package com.yorkys.plugintest.scoreboard;
 
 import com.yorkys.plugintest.MiniGame;
 import com.yorkys.plugintest.gameManager.GameStates;
+import com.yorkys.plugintest.players.MGPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -52,14 +53,29 @@ public final class ScoreBoardManager {
     }
 
     private void updateScoreboardNameTag(Player player) {
-//        if (!miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isPlaying()) return;
-//        String teamName = "nametagTeam";
-//        Team team = mainBoard.getTeam(teamName);
-//
-//        if (team == null) team = mainBoard.registerNewTeam(teamName);
-//
-//        team.addEntry(player.getName());
-//        team.setPrefix(miniGame.getTeamsManager().getMGPlayer(player).getTeam().getChatColor() + "");
-//        team.setSuffix(ChatColor.GRAY + " " + miniGame.getTeamsManager().getMGPlayer(player).getStars() + ChatColor.DARK_RED + "★");
+        Scoreboard board = player.getScoreboard();
+        MGPlayer mgPlayer = miniGame.getTeamsManager().getMGPlayer(player);
+
+        if (mgPlayer == null || !mgPlayer.isPlaying()) return;
+
+        // Crea o recupera il team per il giocatore
+        Team team = board.getTeam(player.getName());
+        if (team == null) {
+            team = board.registerNewTeam(player.getName());
+        }
+
+        // Imposta il prefisso del team
+        String prefix = mgPlayer.getTeam().getChatColor() + ""; // Personalizza il prefisso come desideri
+        String suffix =  ChatColor.GRAY + " " + mgPlayer.getStars() + ChatColor.DARK_RED + "★";
+        team.setPrefix(prefix);
+        team.setSuffix(suffix);
+
+        // Aggiungi il giocatore al team
+        team.addEntry(player.getName());
+
+        // Aggiungi il team a tutti i giocatori
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            onlinePlayer.setScoreboard(board);
+        }
     }
 }
