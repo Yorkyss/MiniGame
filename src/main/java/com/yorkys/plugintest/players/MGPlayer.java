@@ -2,10 +2,8 @@ package com.yorkys.plugintest.players;
 
 import com.yorkys.plugintest.teams.Team;
 import lombok.Getter;
-import net.minecraft.server.v1_8_R3.Entity;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @Getter

@@ -1,7 +1,6 @@
 package com.yorkys.plugintest.players;
 
 import com.yorkys.plugintest.MiniGame;
-import com.yorkys.plugintest.gameManager.GameStates;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
