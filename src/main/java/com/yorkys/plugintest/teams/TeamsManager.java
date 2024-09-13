@@ -108,4 +108,8 @@ public class TeamsManager {
     public List<MGPlayer> getMgPlayers() {
         return  mgPlayers;
     }
+
+    public int getMinMaxPlayer() {
+        return minMaxPlayer;
+    }
 }
