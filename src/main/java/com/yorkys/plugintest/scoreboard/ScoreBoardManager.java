@@ -34,7 +34,7 @@ public final class ScoreBoardManager {
     }
 
     public void updateScoreboard(Player player) {
-        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator()) {
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator() && !miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isPlaying()) {
             SpectatorScoreBoard.updateScoreBoard(player, miniGame);
         } else {
             if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
