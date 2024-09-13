@@ -51,25 +51,26 @@ public final class ScoreBoardManager {
     }
 
     private void updateScoreboardNameTag(Player player) {
-        Scoreboard board = player.getScoreboard();
-        MGPlayer mgPlayer = miniGame.getTeamsManager().getMGPlayer(player);
-
-        if (mgPlayer == null || !mgPlayer.isPlaying()) return;
-
-        Team team = board.getTeam(player.getName());
-        if (team == null) {
-            team = board.registerNewTeam(player.getName());
-        }
-
-        String prefix = mgPlayer.getTeam().getChatColor() + ""; // Personalizza il prefisso come desideri
-        String suffix =  ChatColor.GRAY + " " + mgPlayer.getStars() + ChatColor.DARK_RED + "★";
-        team.setPrefix(prefix);
-        team.setSuffix(suffix);
-
-        team.addEntry(player.getName());
-
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            onlinePlayer.setScoreboard(board);
+            Scoreboard board = onlinePlayer.getScoreboard();
+            MGPlayer mgPlayer = miniGame.getTeamsManager().getMGPlayer(player);
+
+            if (mgPlayer == null || !mgPlayer.isPlaying()) return;
+
+            Team team = board.getTeam(player.getName());
+            if (team == null) {
+                team = board.registerNewTeam(player.getName());
+            }
+
+            String prefix = mgPlayer.getTeam().getChatColor() + ""; // Personalizza il prefisso come desideri
+            String suffix =  ChatColor.GRAY + " " + mgPlayer.getStars() + ChatColor.DARK_RED + "★";
+            team.setPrefix(prefix);
+            team.setSuffix(suffix);
+
+            team.addEntry(player.getName());
         }
+
+
+
     }
 }
