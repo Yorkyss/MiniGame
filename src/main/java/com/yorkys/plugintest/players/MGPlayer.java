@@ -84,7 +84,6 @@ public class MGPlayer {
                 if (pl != null) pl.showPlayer(player);
             }
         }
-
         player.setAllowFlight(value);
         spectator = value;
         // teleport spectator to the top center of the map

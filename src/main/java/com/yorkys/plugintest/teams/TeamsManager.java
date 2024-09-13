@@ -27,9 +27,16 @@ public class TeamsManager {
             return false;
         }
         mgPlayers = miniGame.getMgPlayersManager().getMgPlayers().subList(0, minMaxPlayer);
+        mgPlayers.forEach(mgPlayer -> {
+            mgPlayer.setPlaying(true);
+            mgPlayer.getPlayer().getInventory().clear();
+            // give kit
+        });
         miniGame.getMgPlayersManager().getMgPlayers().forEach(mgPlayer -> {
             if (!mgPlayers.contains(mgPlayer)) {
                 mgPlayer.setSpectator(true);
+                mgPlayer.getPlayer().getInventory().clear();
+                // give spectator kit
             }
         });
         formTeams();
