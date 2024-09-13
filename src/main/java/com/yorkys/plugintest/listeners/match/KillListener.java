@@ -39,7 +39,7 @@ public class KillListener implements Listener {
         Player killer = event.getEntity().getKiller();
         MGPlayer killerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(killer);
 
-        int stars = deadPlayerMGP.getStars() < 1 ? 29 : deadPlayerMGP.getStars() * 2;
+        int stars = deadPlayerMGP.getStars() < 1 ? 1 : deadPlayerMGP.getStars() * 2;
         killerMGP.updateStars(stars);
         String starsWord = stars == 1 ? " stella " : " stelle ";
         event.setDeathMessage(ChatColor.AQUA + killer.getName() + ChatColor.GRAY + " ha rubato " + stars + starsWord + "rosse uccidendo " + ChatColor.YELLOW + deadPlayer.getName());
