@@ -56,8 +56,6 @@ public class KillListener implements Listener {
         MGPlayer killerMGP = miniGame.getMgPlayersManager().getMGPlayerFromPlayer(killer);
 
         int stars = deadPlayerMGP.getStars() < 1 ? 1 : deadPlayerMGP.getStars() * 2;
-        System.out.println(deadPlayerMGP.getStars());
-        System.out.println(stars);
         killerMGP.updateStars(stars);
         String starsWord = stars == 1 ? " stella " : " stelle ";
         Bukkit.getServer().broadcastMessage(ChatColor.AQUA + killer.getName() + ChatColor.GRAY + " ha rubato " + stars + starsWord + "rosse uccidendo " + ChatColor.YELLOW + deadPlayer.getName());
