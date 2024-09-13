@@ -21,10 +21,7 @@ public final class ScoreBoardManager {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (player.getScoreboard() != null && player.getScoreboard().getObjective("MiniGame") != null)
-                        updateScoreboard(player);
-                    else
-                        createNewScoreboard(player);
+                    updateScoreboard(player);
                 }
             }
         }, 0, 20);
@@ -33,18 +30,6 @@ public final class ScoreBoardManager {
     public void cancelTask() {
         if (task != null) {
             task.cancel();
-        }
-    }
-
-    public void createNewScoreboard(Player player) {
-        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).isSpectator()) {
-            SpectatorScoreBoard.createNewScoreboard(player, miniGame);
-        } else {
-            if (miniGame.getGameManager().getGameState() == GameStates.QUEUE) {
-                QueueScoreBoard.createNewScoreboard(player, miniGame);
-            } else if(miniGame.getGameManager().getGameState() == GameStates.PLAYING) {
-                MatchScoreBoard.createNewScoreboard(player, miniGame);
-            }
         }
     }
 

@@ -4,52 +4,33 @@ import com.yorkys.plugintest.MiniGame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
 
 public class MatchScoreBoard {
 
-    public static void createNewScoreboard(Player player, MiniGame miniGame) {
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective("match", "MiniGame");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+    public static void updateScoreBoard(Player player, MiniGame miniGame) {
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        final Scoreboard board = manager.getNewScoreboard();
+        final Objective objective = board.registerNewObjective("match", "dummy");
+
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR); //DisplaySlot.BELOW_NAME IS UNDER PLAYER NAME || TO DO ADD STAR AND HP HEART UNDER PLAYER NAME
         objective.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "MINIGAME");
 
-        objective.getScore(ChatColor.WHITE + " ").setScore(3);
+        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
+            objective.getScore(ChatColor.WHITE + "Team: " + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor()).setScore(7);
+        } else {
+            objective.getScore(ChatColor.WHITE + "Team: nessuno").setScore(7);
+        }
+        objective.getScore((ChatColor.WHITE + "Stelle blu: " + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getBlueStars())).setScore(6);
+        objective.getScore((ChatColor.BLACK + "" + ChatColor.WHITE + "Stelle rosse: " + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getRedStars())).setScore(5);
+        objective.getScore(ChatColor.GRAY + " ").setScore(4);
 
-        objective.getScore(ChatColor.RED + " ").setScore(1);
+        objective.getScore(ChatColor.WHITE + "Tu: ").setScore(3);
+        objective.getScore((ChatColor.WHITE + "Stelle rosse: " + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getStars())).setScore(2);
 
+        objective.getScore(ChatColor.GREEN + " ").setScore(1);
         objective.getScore(ChatColor.WHITE + Bukkit.getIp()).setScore(0);
 
-        String teamKey1 = ChatColor.WHITE.toString();
-
-        Team team1 = scoreboard.registerNewTeam("team1");
-        team1.addEntry(teamKey1);
-        team1.setPrefix(ChatColor.WHITE + "Team: ");
-        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
-        } else {
-            team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
-        }
-
-        objective.getScore(teamKey1).setScore(2);
-
-        player.setScoreboard(scoreboard);
-    }
-
-    public static void updateScoreBoard(Player player, MiniGame miniGame) {
-        if (player.getScoreboard().getObjective("match") != null) {
-            createNewScoreboard(player, miniGame);
-        }
-        Scoreboard scoreboard = player.getScoreboard();
-        Team team1 = scoreboard.getTeam("team1");
-
-        if (miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam() != null) {
-            team1.setSuffix(ChatColor.WHITE + "" + miniGame.getMgPlayersManager().getMGPlayerFromPlayer(player).getTeam().getColor());
-        } else {
-            team1.setSuffix(ChatColor.WHITE + "Team: nessuno");
-        }
+        player.setScoreboard(board);
     }
 }
