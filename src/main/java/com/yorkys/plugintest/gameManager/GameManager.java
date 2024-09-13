@@ -13,6 +13,7 @@ public class GameManager {
     }
 
     public boolean start() {
+        if (gameState != GameStates.QUEUE) return false;
         if (miniGame.getTeamsManager().formQueue()) {
             try {
                 miniGame.getGeneratorManager().createAllGenerators();
@@ -29,6 +30,7 @@ public class GameManager {
     }
 
     public void stop() {
+        if (gameState != GameStates.PLAYING) return;
         gameState = GameStates.FINISHING;
         miniGame.getNpcManager().removeAllNPCs(miniGame.getConfigManager().getSettingsConfig().shopNPCID);
         miniGame.getGeneratorManager().removeAllGenerators();
