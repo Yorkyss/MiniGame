@@ -104,4 +104,12 @@ public class MGPlayer {
     public int getKills() {
         return kills;
     }
+
+    public void resetStats() {
+        kills = 0;
+        deaths = 0;
+        stars = 0;
+        team = null;
+        type = null;
+    }
 }
